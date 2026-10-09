@@ -25,8 +25,15 @@ export const contact = {
 // Carried over from the old site. Keep them true — update or remove as they
 // change.
 export const stats = [
+  { value: '£10K+', label: 'Revenue' },
   { value: '80+', label: 'Cleans completed' },
-  { value: '20+', label: 'Cleaners on Dusty' },
   { value: '30+', label: 'Hosts served' },
-  { value: '500+', label: 'On the waitlist' },
+  { value: '20+', label: 'Cleaners on Dusty' },
+];
+
+// Real customer feedback only. The section stays hidden until this has at
+// least one entry. Get the customer's OK before quoting them; first name and
+// surname initial is enough.
+export const testimonials: { quote: string; name: string; detail?: string }[] = [
+  // { quote: '…', name: 'Sarah M.', detail: 'Weekly clean, Croydon' },
 ];

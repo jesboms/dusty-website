@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { links, contact, stats } from '../data/site';
+import { links, contact, stats, testimonials } from '../data/site';
 
 const appLive = Boolean(links.appStore || links.googlePlay);
 
@@ -14,7 +14,7 @@ const steps = [
 const reasons = [
   {
     title: 'Vetted, trusted cleaners',
-    body: 'Every cleaner is screened and verified before they can take a job, and rated by the households they clean for.',
+    body: 'Every cleaner is background-checked, insured and rated by the households they clean for. Your safety comes first.',
   },
   {
     title: 'Smart local matching',
@@ -145,6 +145,28 @@ const year = new Date().getFullYear();
         </div>
       </div>
     </section>
+
+    <!-- Testimonials (hidden until there's real feedback in site.ts) -->
+    {testimonials.length > 0 && (
+      <section class="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
+        <p class="text-sm font-semibold tracking-wide text-primary uppercase">What customers say</p>
+        <h2 class="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Trusted by busy households</h2>
+        <div class="mt-10 grid gap-5 md:grid-cols-3">
+          {testimonials.map((t) => (
+            <figure class="flex flex-col rounded-2xl bg-card p-6 shadow-ambient">
+              <blockquote class="flex-1 text-ink">“{t.quote}”</blockquote>
+              <figcaption class="mt-5 flex items-center gap-3">
+                <span class="flex size-9 items-center justify-center rounded-full bg-primary-light text-sm font-semibold text-primary-deep" aria-hidden="true">{t.name[0]}</span>
+                <span>
+                  <span class="block text-sm font-semibold">{t.name}</span>
+                  {t.detail && <span class="block text-xs text-muted">{t.detail}</span>}
+                </span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+    )}
 
     <!-- App -->
     <section id="app" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-20 sm:px-6">
