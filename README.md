@@ -14,10 +14,10 @@ Every push to `main` deploys automatically (`.github/workflows/deploy.yml`).
 
 | What | Where |
 |---|---|
-| Links (waitlist forms, WhatsApp, store links), contact details, stats | `src/data/site.ts` |
+| Links (waitlist forms, WhatsApp, store links), contact details, stats, hero photos, reviews | `src/data/site.ts` |
 | The page | `src/pages/index.astro` |
-| Brand colours and font (copied from the app's `lib/tokens.js`) | `src/styles/global.css` |
-| Logo, favicons, social preview image, `CNAME` | `public/` |
+| Colours (Tailwind 3 palette, pinned so the port of the original design matches) | `src/styles/global.css` |
+| Logo, favicons, hero photos, app mockup, social preview image, `CNAME` | `public/` |
 
 When the app is live, put the App Store and Google Play URLs in `src/data/site.ts`. The "coming soon" badges turn into download links on their own.
 

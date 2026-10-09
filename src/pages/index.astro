@@ -1,242 +1,548 @@
 ---
+// A port of the original site (adeolade1st/getDusty-Live-Final, src/App.tsx):
+// same layout, classes and copy, with the app's logo and our own links/data.
 import Layout from '../layouts/Layout.astro';
-import { links, contact, stats, testimonials } from '../data/site';
+import { links, contact, stats, testimonials, heroImages } from '../data/site';
+import {
+  Menu, X, Sparkles, CircleCheck, Users, Calendar, House,
+  Star, MapPin, Mail, Phone, ChevronLeft, ChevronRight,
+  Shield, Clock, Heart, Zap, ArrowRight,
+} from '@lucide/astro';
 
-const appLive = Boolean(links.appStore || links.googlePlay);
+const nav = [
+  { label: 'About', id: 'about' },
+  { label: 'App', id: 'app' },
+  { label: 'Contact', id: 'contact' },
+];
+
+const about = [
+  { icon: Shield, title: 'Vetted Cleaners', desc: 'Every cleaner is thoroughly screened, background-checked, and verified' },
+  { icon: Sparkles, title: 'Smart Matching', desc: 'AI-powered matching based on your specific needs and preferences' },
+  { icon: Calendar, title: 'Flexible Booking', desc: 'Book whenever it suits your schedule — one-off or recurring' },
+];
 
 const steps = [
-  { title: 'Tell us what you need', body: 'Your home, your dates, your budget. Takes a minute.' },
-  { title: 'Get matched', body: 'Dusty suggests the cleaner who fits best — and tells you why.' },
-  { title: 'Pick your time', body: 'One-off, regular or a deep clean. Whatever suits you.' },
-  { title: 'Enjoy a clean home', body: 'Relax. Your card is only charged once the job is done.' },
+  { icon: House, title: 'Tell Us What You Need', desc: 'Share your cleaning preferences and home details' },
+  { icon: Sparkles, title: 'Get Matched', desc: 'Our AI finds the perfect cleaner for you' },
+  { icon: Calendar, title: 'Choose Your Time', desc: 'Book a slot that works for your schedule' },
+  { icon: CircleCheck, title: 'Enjoy a Clean Home', desc: 'Relax while we handle the cleaning' },
 ];
 
-const reasons = [
+const benefits = [
+  { icon: Shield, title: 'Vetted & Trusted Cleaners', desc: 'Every cleaner is background checked, insured, and rated by previous clients. Your safety comes first.' },
+  { icon: MapPin, title: 'Smart Local Matching', desc: 'Our AI algorithm matches you with cleaners based on location, availability, and your specific preferences.' },
+  { icon: Clock, title: 'Flexible Booking Options', desc: 'One-time clean, regular weekly visits, or deep cleans — book exactly what you need, when you need it.' },
+  { icon: Heart, title: 'Fair Pay for Cleaners', desc: 'We ensure cleaners are fairly compensated for their professional work, building lasting trusted relationships.' },
+];
+
+const features = [
+  { icon: MapPin, title: 'Location-Based Matching', desc: 'Our AI finds the perfect cleaner near you instantly based on availability and preferences.' },
+  { icon: Users, title: 'Smart Cleaner Profiles', desc: 'Browse detailed profiles, ratings, and specialties to choose the right fit for your home.' },
+  { icon: Calendar, title: 'Real-Time Booking', desc: 'Book, reschedule, or cancel in seconds through our intuitive mobile interface.' },
+  { icon: CircleCheck, title: 'Verified & Safe', desc: 'Every cleaner is background-checked, insured, and AI-verified for your peace of mind.' },
+];
+
+const stores = [
   {
-    title: 'Vetted, trusted cleaners',
-    body: 'Every cleaner is background-checked, insured and rated by the households they clean for. Your safety comes first.',
+    name: 'Google Play',
+    kicker: 'GET IT ON',
+    href: links.googlePlay,
+    path: 'M3.18 23.76c.3.17.65.2.98.09l12.09-6.98-2.76-2.76-10.31 9.65zM.5 1.83C.19 2.16 0 2.67 0 3.33v17.34c0 .66.19 1.17.5 1.5l.08.07 9.71-9.71v-.23L.58 1.76l-.08.07zM20.65 10.66l-2.76-1.59-3.09 3.09 3.09 3.09 2.79-1.61c.8-.46.8-1.52-.03-1.98zM4.16.24L16.25 7.22l-2.76 2.76L3.18.33c.33-.2.68-.18.98-.09z',
   },
   {
-    title: 'Smart local matching',
-    body: 'We match on location, availability and what you actually need — not whoever happens to be top of a list.',
-  },
-  {
-    title: 'Flexible booking',
-    body: 'Book a one-off, set up weekly visits, or get a deep clean before you move. You choose.',
-  },
-  {
-    title: 'Fair pay for cleaners',
-    body: 'Cleaners set their own prices and choose their own jobs. Good work, fairly paid, builds lasting relationships.',
+    name: 'App Store',
+    kicker: 'Download on the',
+    href: links.appStore,
+    path: 'M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.19 1.28-2.17 3.82.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.76M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z',
   },
 ];
+const appLive = stores.some((s) => s.href);
 
 const year = new Date().getFullYear();
+const gradientBtn = 'bg-gradient-to-r from-violet-600 to-purple-700 hover:from-violet-700 hover:to-purple-800 text-white';
+const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-text text-transparent';
 ---
 
 <Layout>
-  <header class="sticky top-0 z-10 border-b border-hairline/80 bg-surface/85 backdrop-blur">
-    <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6" aria-label="Main">
-      <a href="/" class="flex items-center gap-2 font-semibold text-ink">
-        <img src="/logo.png" alt="" width="32" height="32" class="size-8 rounded-lg" />
-        <span class="text-lg tracking-tight">Dusty</span>
-      </a>
-      <div class="flex items-center gap-1 sm:gap-2">
-        <a href="#how" class="hidden rounded-full px-3 py-2 text-sm text-muted hover:text-ink sm:inline-block">How it works</a>
-        <a href="#cleaners" class="hidden rounded-full px-3 py-2 text-sm text-muted hover:text-ink sm:inline-block">For cleaners</a>
-        <a href={links.customerWaitlist} class="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-pressed">
-          Join the waitlist
+  <div class="min-h-screen bg-white text-gray-900">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <a href="#hero" data-scroll class="flex items-center gap-2.5 group">
+          <img src="/logo.png" alt="" width="40" height="40" class="h-10 w-10 rounded-lg" />
+          <span class={`text-2xl font-extrabold tracking-tight ${gradientText}`}>Dusty</span>
         </a>
-      </div>
-    </nav>
-  </header>
 
-  <main>
-    <!-- Hero -->
-    <section class="relative overflow-hidden">
-      <div aria-hidden="true" class="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[60rem] -translate-x-1/2 rounded-full bg-primary-light/70 blur-3xl"></div>
-      <div class="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pt-14 pb-20 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:pt-24 lg:pb-28">
-        <div>
-          <p class="inline-flex items-center gap-2 rounded-full bg-card px-3 py-1 text-sm font-medium text-primary-deep shadow-ambient">
-            <span class="size-2 rounded-full bg-success" aria-hidden="true"></span>
+        <div class="hidden md:flex items-center gap-1">
+          {nav.map((item) => (
+            <a
+              href={`#${item.id}`}
+              data-scroll
+              class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-violet-700 rounded-lg hover:bg-violet-50 transition-all duration-200"
+            >
+              {item.label}
+            </a>
+          ))}
+          <a
+            href={links.cleanerSignup}
+            target="_blank"
+            rel="noopener noreferrer"
+            class={`ml-3 inline-flex items-center gap-1.5 ${gradientBtn} text-sm font-semibold py-2 px-5 rounded-lg shadow-md shadow-violet-200 hover:shadow-lg hover:shadow-violet-300 transition-all duration-200`}
+          >
+            <Sparkles size={14} />
+            I am a Cleaner
+          </a>
+        </div>
+
+        <button
+          id="menu-toggle"
+          class="md:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-100 transition"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <Menu size={22} class="menu-open" />
+          <X size={22} class="menu-close hidden" />
+        </button>
+      </nav>
+
+      <div id="mobile-menu" class="md:hidden border-t border-gray-100 bg-white/95 backdrop-blur-lg" hidden>
+        <div class="px-4 py-3 space-y-1">
+          {nav.map((item) => (
+            <a
+              href={`#${item.id}`}
+              data-scroll
+              class="block w-full text-left px-4 py-3 text-gray-700 hover:text-violet-700 hover:bg-violet-50 rounded-lg font-medium transition"
+            >
+              {item.label}
+            </a>
+          ))}
+          <a
+            href={links.cleanerSignup}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full text-center bg-gradient-to-r from-violet-600 to-purple-700 text-white font-semibold py-3 px-5 rounded-lg mt-2"
+          >
+            I am a Cleaner
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="px-4 sm:px-6 lg:px-8 pt-12 pb-20 md:pt-20 md:pb-28 max-w-7xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div class="order-2 lg:order-1">
+          <div class="inline-flex items-center gap-2 bg-violet-50 text-violet-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
+            <Zap size={14} />
             Now accepting early access sign-ups
-          </p>
-          <h1 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-            Trusted home cleaning, <span class="text-primary">matched to you</span>
+          </div>
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.1] sm:leading-none tracking-tight mb-6">
+            Trusted home cleaning,{' '}
+            <span class={gradientText}>matched to you</span>
           </h1>
-          <p class="mt-5 max-w-xl text-lg text-muted">
-            Dusty connects busy UK households with vetted, local cleaners. Tell us what you need and we'll find the right person for your home — no endless scrolling, no chasing quotes.
+          <p class="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed sm:leading-7 max-w-lg">
+            Connect with vetted, local Cleaners in minutes. Save time, enjoy a spotless home — powered by smart AI matching.
           </p>
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href={links.customerWaitlist} class="rounded-full bg-primary px-6 py-3.5 text-center font-semibold text-white shadow-ambient transition-colors hover:bg-primary-pressed">
-              Join the waitlist
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a
+              href={links.customerWaitlist}
+              target="_blank"
+              rel="noopener noreferrer"
+              class={`inline-flex items-center justify-center gap-2 ${gradientBtn} font-bold py-4 px-8 rounded-xl shadow-lg shadow-violet-200 hover:shadow-xl hover:shadow-violet-300 transition-all duration-200 text-base sm:text-lg`}
+            >
+              <Sparkles size={20} />
+              Join Our Waitlist
             </a>
-            <a href={links.whatsapp} class="rounded-full bg-primary-light px-6 py-3.5 text-center font-semibold text-primary-deep transition-colors hover:bg-surface-container">
-              Book a clean on WhatsApp
+            <a
+              href={links.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 bg-white border-2 border-gray-200 text-gray-800 hover:border-violet-300 hover:bg-violet-50 font-bold py-4 px-8 rounded-xl transition-all duration-200 text-base sm:text-lg"
+            >
+              Book a Clean Now
             </a>
           </div>
-          <p class="mt-4 text-sm text-muted">
-            Are you a cleaner? <a href={links.cleanerSignup} class="font-medium text-primary underline-offset-4 hover:underline">Join our cleaner network</a>
+          <p class="text-sm text-gray-500 mt-5 flex items-center gap-1.5">
+            <span class="inline-flex -space-x-1.5" aria-hidden="true">
+              {[1, 2, 3, 4].map(() => (
+                <span class="w-5 h-5 rounded-full bg-gradient-to-br from-violet-400 to-purple-500 border-2 border-white inline-block" />
+              ))}
+            </span>
+            Join 500+ early users on the waitlist
           </p>
         </div>
 
-        <!-- The app's hero moment: one recommendation, with its reasons. -->
-        <div class="mx-auto w-full max-w-sm" aria-hidden="true">
-          <div class="rounded-3xl bg-card p-5 shadow-ambient">
-            <p class="text-xs font-semibold tracking-wide text-primary uppercase">Dusty's pick for you</p>
-            <div class="mt-4 flex items-center gap-3">
-              <div class="flex size-12 items-center justify-center rounded-full bg-primary-light text-lg font-semibold text-primary-deep">A</div>
-              <div>
-                <p class="font-semibold">Amara</p>
-                <p class="text-sm text-muted">★ 4.9 · 62 cleans · 1.2 miles away</p>
+        <div class="order-1 lg:order-2">
+          <div
+            id="hero-carousel"
+            class="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[560px] rounded-2xl overflow-hidden shadow-2xl group"
+            aria-roledescription="carousel"
+          >
+            {heroImages.map((img, idx) => (
+              <div
+                class="absolute inset-0 transition-opacity duration-700 ease-in-out"
+                style={{ opacity: idx === 0 ? 1 : 0 }}
+                data-slide
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  class="w-full h-full object-cover"
+                  loading={idx === 0 ? 'eager' : 'lazy'}
+                  fetchpriority={idx === 0 ? 'high' : 'auto'}
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
               </div>
-              <span class="ml-auto rounded-full bg-primary-light px-2.5 py-1 text-xs font-medium text-primary-deep">Verified</span>
+            ))}
+
+            <button
+              data-prev
+              class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity duration-300 hover:bg-white"
+              aria-label="Previous image"
+            >
+              <ChevronLeft size={20} class="text-gray-800" />
+            </button>
+            <button
+              data-next
+              class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity duration-300 hover:bg-white"
+              aria-label="Next image"
+            >
+              <ChevronRight size={20} class="text-gray-800" />
+            </button>
+
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+              {heroImages.map((_, idx) => (
+                <button
+                  data-dot={idx}
+                  class:list={[
+                    'w-2.5 h-2.5 rounded-full transition-all duration-300',
+                    idx === 0 ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/75',
+                  ]}
+                  aria-label={`Go to image ${idx + 1}`}
+                />
+              ))}
             </div>
-            <ul class="mt-5 space-y-2 text-sm text-muted">
-              <li class="flex gap-2"><span class="text-primary">✓</span> Free on Saturday morning</li>
-              <li class="flex gap-2"><span class="text-primary">✓</span> Great with pets — you have a dog</li>
-              <li class="flex gap-2"><span class="text-primary">✓</span> Within your £60 budget</li>
-            </ul>
-            <div class="mt-5 rounded-full bg-primary py-3 text-center text-sm font-semibold text-white">Request Amara</div>
           </div>
-          <p class="mt-3 text-center text-xs text-muted">Example of a match in the Dusty app</p>
         </div>
       </div>
     </section>
 
-    <!-- Stats -->
-    <section class="border-y border-hairline bg-card">
-      <dl class="mx-auto grid max-w-6xl grid-cols-2 gap-y-8 px-4 py-10 sm:px-6 md:grid-cols-4">
-        {stats.map((s) => (
-          <div class="flex flex-col-reverse text-center">
-            <dt class="text-sm text-muted">{s.label}</dt>
-            <dd class="text-3xl font-bold tracking-tight text-primary-deep">{s.value}</dd>
-          </div>
-        ))}
-      </dl>
-    </section>
-
-    <!-- How it works -->
-    <section id="how" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-20 sm:px-6">
-      <p class="text-sm font-semibold tracking-wide text-primary uppercase">How it works</p>
-      <h2 class="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">A spotless home in four steps</h2>
-      <ol class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {steps.map((step, i) => (
-          <li class="rounded-2xl bg-card p-6 shadow-ambient">
-            <span class="flex size-9 items-center justify-center rounded-full bg-primary-light font-semibold text-primary-deep">{i + 1}</span>
-            <h3 class="mt-4 font-semibold">{step.title}</h3>
-            <p class="mt-1.5 text-sm text-muted">{step.body}</p>
-          </li>
-        ))}
-      </ol>
-    </section>
-
-    <!-- Why Dusty -->
-    <section class="bg-surface-container/60">
-      <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <p class="text-sm font-semibold tracking-wide text-primary uppercase">Why Dusty</p>
-        <h2 class="mt-2 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">Finding a cleaner shouldn't be a chore in itself</h2>
-        <div class="mt-10 grid gap-5 md:grid-cols-2">
-          {reasons.map((r) => (
-            <div class="rounded-2xl bg-card p-6 shadow-ambient">
-              <h3 class="font-semibold">{r.title}</h3>
-              <p class="mt-1.5 text-muted">{r.body}</p>
+    <!-- About Section -->
+    <section id="about" class="scroll-mt-16 px-4 sm:px-6 lg:px-8 py-20 md:py-28 bg-gradient-to-b from-gray-50 to-violet-50">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-14">
+          <p class="text-sm font-semibold text-violet-600 tracking-wide uppercase mb-3">Who We Are</p>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">About Dusty</h2>
+        </div>
+        <div class="rounded-2xl p-8 md:p-12 shadow-xs border border-gray-100 mb-14">
+          <p class="text-lg md:text-xl text-gray-700 leading-relaxed md:leading-7 text-center max-w-3xl mx-auto">
+            Dusty is a platform that connects busy households in the UK with trusted, vetted Cleaners. We believe everyone deserves a clean home without the stress of finding and managing cleaners.
+          </p>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-6">
+          {about.map(({ icon: Icon, title, desc }) => (
+            <div class="group bg-white rounded-xl p-6 border border-gray-100 hover:border-violet-200 hover:shadow-lg hover:shadow-violet-100/50 transition-all duration-300">
+              <div class="w-12 h-12 bg-gradient-to-br from-violet-100 to-purple-50 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                <Icon class="text-violet-600" size={24} />
+              </div>
+              <h3 class="font-bold text-gray-900 text-lg mb-2">{title}</h3>
+              <p class="text-gray-600 leading-relaxed">{desc}</p>
             </div>
           ))}
         </div>
       </div>
     </section>
 
-    <!-- Testimonials (hidden until there's real feedback in site.ts) -->
-    {testimonials.length > 0 && (
-      <section class="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
-        <p class="text-sm font-semibold tracking-wide text-primary uppercase">What customers say</p>
-        <h2 class="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Trusted by busy households</h2>
-        <div class="mt-10 grid gap-5 md:grid-cols-3">
+    <!-- How It Works Section -->
+    <section class="px-4 sm:px-6 lg:px-8 py-20 md:py-28 bg-gradient-to-b from-gray-50 to-violet-50">
+      <div class="text-center mb-14">
+        <p class="text-sm font-semibold text-violet-600 tracking-wide uppercase mb-3">Simple Process</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">How It Works</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 relative">
+        {steps.map(({ icon: Icon, title, desc }, idx) => (
+          <div class="relative text-center group">
+            {idx < 3 && (
+              <div class="hidden lg:block absolute top-10 left-[60%] w-[80%] h-px border-t-2 border-dashed border-violet-200" />
+            )}
+            <div class="relative z-10 w-20 h-20 mx-auto bg-gradient-to-br from-violet-600 to-purple-700 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-violet-200 group-hover:shadow-xl group-hover:shadow-violet-300 group-hover:scale-105 transition-all duration-300">
+              <Icon class="text-white" size={32} />
+              <span class="absolute -top-2 -right-2 w-7 h-7 bg-white text-violet-700 text-xs font-bold rounded-full flex items-center justify-center shadow-sm border border-violet-100">
+                {idx + 1}
+              </span>
+            </div>
+            <h3 class="font-bold text-lg text-gray-900 mb-2">{title}</h3>
+            <p class="text-gray-600 max-w-[220px] mx-auto">{desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Why Choose Dusty Section -->
+    <section class="px-4 sm:px-6 lg:px-8 py-20 md:py-28 bg-gradient-to-b from-gray-50 to-violet-50">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-14">
+          <p class="text-sm font-semibold text-violet-600 tracking-wide uppercase mb-3">Our Advantages</p>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">Why Choose Dusty</h2>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-6">
+          {benefits.map(({ icon: Icon, title, desc }) => (
+            <div class="group bg-white rounded-2xl p-7 border border-gray-100 hover:border-violet-200 hover:shadow-lg hover:shadow-violet-100/50 transition-all duration-300">
+              <div class="w-12 h-12 bg-gradient-to-br from-violet-100 to-purple-50 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                <Icon class="text-violet-600" size={24} />
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">{title}</h3>
+              <p class="text-gray-600 leading-relaxed">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="px-4 sm:px-6 lg:px-8 py-20 md:py-28 max-w-7xl mx-auto">
+      <div class="text-center mb-14">
+        <p class="text-sm font-semibold text-violet-600 tracking-wide uppercase mb-3">Social Proof</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">Trusted by Busy Households</h2>
+      </div>
+      {testimonials.length > 0 && (
+        <div class="grid md:grid-cols-3 gap-6 mb-16">
           {testimonials.map((t) => (
-            <figure class="flex flex-col rounded-2xl bg-card p-6 shadow-ambient">
-              <blockquote class="flex-1 text-ink">“{t.quote}”</blockquote>
-              <figcaption class="mt-5 flex items-center gap-3">
-                <span class="flex size-9 items-center justify-center rounded-full bg-primary-light text-sm font-semibold text-primary-deep" aria-hidden="true">{t.name[0]}</span>
-                <span>
-                  <span class="block text-sm font-semibold">{t.name}</span>
-                  {t.detail && <span class="block text-xs text-muted">{t.detail}</span>}
+            <figure class="bg-white rounded-2xl p-7 border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+              <div class="flex gap-0.5 mb-4" aria-label={`${t.rating ?? 5} out of 5 stars`}>
+                {Array.from({ length: t.rating ?? 5 }).map(() => (
+                  <Star size={16} class="fill-amber-400 text-amber-400" />
+                ))}
+              </div>
+              <blockquote class="text-gray-700 mb-5 leading-relaxed">"{t.quote}"</blockquote>
+              <figcaption class="flex items-center gap-3">
+                <span class="w-9 h-9 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white text-sm font-bold" aria-hidden="true">
+                  {t.name[0]}
                 </span>
+                <span class="font-semibold text-gray-900">{t.name}</span>
               </figcaption>
             </figure>
           ))}
         </div>
-      </section>
-    )}
-
-    <!-- App -->
-    <section id="app" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-20 sm:px-6">
-      <div class="rounded-3xl bg-primary-deep px-6 py-14 text-center text-white sm:px-12">
-        <p class="text-sm font-semibold tracking-wide text-primary-light uppercase">{appLive ? 'Out now' : 'Coming soon'}</p>
-        <h2 class="mx-auto mt-2 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">The Dusty app for iPhone and Android</h2>
-        <p class="mx-auto mt-4 max-w-xl text-white/80">
-          Book, reschedule and message your cleaner in one place. Join the early access list and be among the first to try it.
-        </p>
-        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          {[
-            { label: 'App Store', href: links.appStore },
-            { label: 'Google Play', href: links.googlePlay },
-          ].map((store) =>
-            store.href ? (
-              <a href={store.href} class="w-full rounded-full bg-white px-6 py-3 font-semibold text-ink sm:w-auto">{store.label}</a>
-            ) : (
-              <span class="w-full rounded-full border border-white/30 px-6 py-3 font-medium text-white/70 sm:w-auto">{store.label} · soon</span>
-            ),
-          )}
-        </div>
-        {!appLive && (
-          <a href={links.customerWaitlist} class="mt-6 inline-block rounded-full bg-white px-6 py-3.5 font-semibold text-primary-deep transition-colors hover:bg-primary-light">
-            Get early access
-          </a>
-        )}
+      )}
+      <div class="grid sm:grid-cols-4 gap-6">
+        {stats.map((stat) => (
+          <div class="text-center">
+            <p class={`text-4xl md:text-5xl font-extrabold mb-2 ${gradientText}`}>{stat.value}</p>
+            <p class="text-gray-600 font-medium">{stat.label}</p>
+          </div>
+        ))}
       </div>
     </section>
 
-    <!-- Cleaners -->
-    <section id="cleaners" class="mx-auto max-w-6xl scroll-mt-20 px-4 pb-20 sm:px-6">
-      <div class="grid items-center gap-8 rounded-3xl bg-card p-8 shadow-ambient sm:p-12 md:grid-cols-[1.4fr_1fr]">
-        <div>
-          <p class="text-sm font-semibold tracking-wide text-primary uppercase">For cleaners</p>
-          <h2 class="mt-2 text-3xl font-bold tracking-tight">Your prices. Your hours. Local jobs.</h2>
-          <p class="mt-3 text-muted">
-            Join our local cleaner network. Set your own rates, choose the jobs you want, and get matched with households near you.
+    <!-- Coming Soon App Section -->
+    <section id="app" class="scroll-mt-16 px-4 sm:px-6 lg:px-8 py-20 md:py-28 bg-gradient-to-br from-violet-50 via-purple-50 to-white overflow-hidden">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-14">
+          <span class="inline-block bg-violet-100 text-violet-700 font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">
+            {appLive ? 'Out Now' : 'Coming Soon'}
+          </span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">AI-Powered Cleaner Matching</h2>
+          <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed md:leading-7">
+            The ultimate smart cleaning app that uses advanced AI to match you with trusted cleaners based on your location across the UK
           </p>
         </div>
-        <a href={links.cleanerSignup} class="rounded-full bg-primary px-6 py-3.5 text-center font-semibold text-white transition-colors hover:bg-primary-pressed">
-          Join as a cleaner
-        </a>
+
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div class="flex justify-center">
+            <img
+              src="/images/app-mockup.png"
+              alt="Dusty app screenshot"
+              width="340"
+              height="735"
+              loading="lazy"
+              class="w-full max-w-[320px] sm:max-w-[380px] drop-shadow-2xl"
+            />
+          </div>
+
+          <div class="flex flex-col gap-6">
+            <div class="grid sm:grid-cols-2 gap-4">
+              {features.map(({ icon: Icon, title, desc }) => (
+                <div class="group bg-white rounded-xl p-5 border border-violet-100 hover:border-violet-300 hover:shadow-lg hover:shadow-violet-100/50 transition-all duration-300">
+                  <div class="w-10 h-10 bg-gradient-to-br from-violet-600 to-purple-700 rounded-lg flex items-center justify-center mb-3 shadow-xs group-hover:scale-110 transition-transform duration-300">
+                    <Icon class="text-white" size={18} />
+                  </div>
+                  <h3 class="text-sm font-bold text-gray-900 mb-1">{title}</h3>
+                  <p class="text-xs text-gray-500 leading-relaxed">{desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <a
+              href={links.customerWaitlist}
+              target="_blank"
+              rel="noopener noreferrer"
+              class={`inline-flex items-center justify-center gap-2 ${gradientBtn} font-bold py-4 px-8 rounded-xl shadow-lg shadow-violet-200 hover:shadow-xl hover:shadow-violet-300 transition-all duration-200`}
+            >
+              <Sparkles size={18} />
+              Get Early Access to App
+            </a>
+
+            <div>
+              <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
+                {appLive ? 'Download Now' : 'Download Coming Soon'}
+              </p>
+              <div class="flex flex-col sm:flex-row gap-3">
+                {stores.map((store) => {
+                  const Tag = store.href ? 'a' : 'div';
+                  return (
+                    <Tag
+                      href={store.href || undefined}
+                      class:list={[
+                        'flex-1 flex items-center gap-3 bg-gray-900 text-white rounded-xl px-5 py-3.5',
+                        store.href ? 'hover:bg-gray-800 transition-colors' : 'cursor-not-allowed opacity-70 select-none',
+                      ]}
+                    >
+                      <svg viewBox="0 0 24 24" class="w-7 h-7 shrink-0" fill="currentColor" aria-hidden="true">
+                        <path d={store.path} />
+                      </svg>
+                      <div>
+                        <p class="text-[10px] leading-none text-gray-300">{store.kicker}</p>
+                        <p class="text-base font-bold leading-tight">{store.name}</p>
+                      </div>
+                    </Tag>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-16 p-8 md:p-10 bg-white rounded-2xl border-2 border-violet-200 text-center shadow-xs">
+          <p class="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed md:leading-7">
+            <span class={`font-bold ${gradientText}`}>Ready to experience the future of home cleaning?</span>
+            <br />
+            Join our exclusive early access list and be among the first to use Dusty's AI-powered app.
+          </p>
+          <a
+            href={links.cleanerSignup}
+            target="_blank"
+            rel="noopener noreferrer"
+            class={`inline-flex items-center justify-center gap-2 ${gradientBtn} font-bold py-4 px-8 rounded-xl shadow-lg shadow-violet-200 hover:shadow-xl hover:shadow-violet-300 transition-all duration-200 text-lg`}
+          >
+            Join as a Cleaner
+            <ArrowRight size={18} />
+          </a>
+        </div>
       </div>
     </section>
-  </main>
 
-  <footer id="contact" class="border-t border-hairline bg-card">
-    <div class="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-3">
-      <div>
-        <a href="/" class="flex items-center gap-2 font-semibold">
-          <img src="/logo.png" alt="" width="32" height="32" class="size-8 rounded-lg" />
-          <span class="text-lg tracking-tight">Dusty</span>
-        </a>
-        <p class="mt-3 text-sm text-muted">Trusted home cleaning, matched to you.</p>
+    <!-- Contact Section / Footer -->
+    <footer id="contact" class="scroll-mt-16 px-4 sm:px-6 lg:px-8 py-16 md:py-24 bg-gray-800 text-white">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+          <div>
+            <div class="flex items-center gap-2.5 mb-4">
+              <img src="/logo.png" alt="" width="40" height="40" class="h-10 w-10 rounded-lg" />
+              <span class="text-2xl font-extrabold tracking-tight text-white">Dusty</span>
+            </div>
+            <p class="text-gray-400 leading-relaxed">Trusted home cleaning, matched to you.</p>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-5">Quick Links</h3>
+            <div class="space-y-3">
+              {nav.map((item) => (
+                <a href={`#${item.id}`} data-scroll class="block text-gray-400 hover:text-white transition-colors duration-200">
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-5">Contact Us</h3>
+            <div class="space-y-3">
+              <a href={`mailto:${contact.email}`} class="flex items-center gap-2.5 text-gray-400 hover:text-white transition-colors duration-200">
+                <Mail size={16} />
+                <span class="text-sm">Info@getdusty.co.uk</span>
+              </a>
+              <a href={contact.phoneHref} class="flex items-center gap-2.5 text-gray-400 hover:text-white transition-colors duration-200">
+                <Phone size={16} />
+                <span class="text-sm">{contact.phoneDisplay}</span>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-5">Follow Us</h3>
+            <a
+              href={links.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2.5 text-gray-400 hover:text-white transition-colors duration-200"
+            >
+              <!-- Lucide dropped brand icons; this is its old Instagram glyph. -->
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+              </svg>
+              <span class="text-sm">{contact.instagramHandle}</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-800 pt-8">
+          <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="text-gray-500 text-sm">&copy; {year} Dusty. All rights reserved.</p>
+            <a
+              href={links.customerWaitlist}
+              target="_blank"
+              rel="noopener noreferrer"
+              class={`inline-flex items-center justify-center gap-2 ${gradientBtn} font-semibold py-2.5 px-6 rounded-lg shadow-md shadow-violet-900/30 transition-all duration-200 text-sm`}
+            >
+              <Sparkles size={14} />
+              Join Early Access
+            </a>
+          </div>
+        </div>
       </div>
-      <div>
-        <h2 class="text-sm font-semibold">Contact us</h2>
-        <ul class="mt-3 space-y-2 text-sm text-muted">
-          <li><a href={`mailto:${contact.email}`} class="hover:text-ink">{contact.email}</a></li>
-          <li><a href={contact.phoneHref} class="hover:text-ink">{contact.phoneDisplay}</a></li>
-          <li><a href={links.whatsapp} class="hover:text-ink">WhatsApp</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2 class="text-sm font-semibold">Follow us</h2>
-        <ul class="mt-3 space-y-2 text-sm text-muted">
-          <li><a href={links.instagram} class="hover:text-ink">Instagram {contact.instagramHandle}</a></li>
-        </ul>
-      </div>
-    </div>
-    <p class="border-t border-hairline py-6 text-center text-xs text-muted">© {year} Dusty. All rights reserved.</p>
-  </footer>
+    </footer>
+  </div>
 </Layout>
+
+<script>
+  // Mobile menu
+  const toggle = document.getElementById('menu-toggle')!;
+  const menu = document.getElementById('mobile-menu')!;
+  const setMenu = (open: boolean) => {
+    menu.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.querySelector('.menu-open')!.classList.toggle('hidden', open);
+    toggle.querySelector('.menu-close')!.classList.toggle('hidden', !open);
+  };
+  toggle.addEventListener('click', () => setMenu(menu.hidden));
+  document.querySelectorAll('[data-scroll]').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+
+  // Hero carousel: crossfade, advancing every 5s
+  const carousel = document.getElementById('hero-carousel')!;
+  const slides = [...carousel.querySelectorAll<HTMLElement>('[data-slide]')];
+  const dots = [...carousel.querySelectorAll<HTMLElement>('[data-dot]')];
+  let current = 0;
+
+  const show = (idx: number) => {
+    current = (idx + slides.length) % slides.length;
+    slides.forEach((s, i) => (s.style.opacity = i === current ? '1' : '0'));
+    dots.forEach((d, i) => {
+      d.classList.toggle('bg-white', i === current);
+      d.classList.toggle('scale-125', i === current);
+      d.classList.toggle('bg-white/50', i !== current);
+      d.classList.toggle('hover:bg-white/75', i !== current);
+    });
+  };
+
+  carousel.querySelector('[data-prev]')!.addEventListener('click', () => show(current - 1));
+  carousel.querySelector('[data-next]')!.addEventListener('click', () => show(current + 1));
+  dots.forEach((d, i) => d.addEventListener('click', () => show(i)));
+
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setInterval(() => show(current + 1), 5000);
+  }
+</script>

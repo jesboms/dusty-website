@@ -22,18 +22,24 @@ export const contact = {
   instagramHandle: '@getdustyapp',
 };
 
-// Carried over from the old site. Keep them true — update or remove as they
+// Keep these true — update or remove them as they
 // change.
 export const stats = [
   { value: '£10K+', label: 'Revenue' },
-  { value: '80+', label: 'Cleans completed' },
-  { value: '30+', label: 'Hosts served' },
-  { value: '20+', label: 'Cleaners on Dusty' },
+  { value: '80+', label: 'Cleans Completed' },
+  { value: '30+ Hosts', label: 'UK Wide Coverage' },
+  { value: '20+', label: 'Dusters' },
+];
+
+export const heroImages = [
+  { src: '/images/hero-4108715.jpg', alt: 'Professional cleaner at work in a modern home' },
+  { src: '/images/hero-4239091.jpg', alt: 'Spotless living room with natural light' },
+  { src: '/images/hero-4107120.jpg', alt: 'Cleaner organizing a beautiful kitchen' },
 ];
 
 // Real customer feedback only. The section stays hidden until this has at
 // least one entry. Get the customer's OK before quoting them; first name and
 // surname initial is enough.
-export const testimonials: { quote: string; name: string; detail?: string }[] = [
-  // { quote: '…', name: 'Sarah M.', detail: 'Weekly clean, Croydon' },
+export const testimonials: { quote: string; name: string; rating?: number }[] = [
+  // { quote: '…', name: 'Sarah M.', rating: 5 },
 ];
