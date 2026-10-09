@@ -1,0 +1,66 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+
+/*
+ * Brand tokens, copied from the app (apps/mobile/lib/tokens.js in jesboms/dusty)
+ * so the site and the app look like one product. If a value changes there,
+ * change it here too.
+ */
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary: #7c3aed;
+  --color-primary-pressed: #6d28d9;
+  --color-primary-deep: #630ed4;
+  --color-primary-light: #ede0ff;
+  --color-accent: #06b6d4;
+
+  --color-ink: #1c192c;
+  --color-muted: #4a4455;
+
+  --color-surface: #fdf8ff;
+  --color-surface-container: #f1ebff;
+  --color-card: #ffffff;
+
+  --color-outline: #ccc3d8;
+  --color-hairline: #eee8f6;
+
+  --color-success: #10b981;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-surface text-ink font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+}
+
+@utility shadow-ambient {
+  box-shadow:
+    0 1px 2px rgb(28 25 44 / 0.04),
+    0 8px 24px -6px rgb(99 14 212 / 0.12);
+}
