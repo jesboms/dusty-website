@@ -15,6 +15,24 @@ export const links = {
   googlePlay: '',
 };
 
+// The on-page early access form posts straight into the customerWaitlist
+// Google Form above, so responses land in the same sheet. If a question is
+// added, removed or recreated in the form, its entry ID here must be updated
+// (find them in the form's "Get pre-filled link").
+export const waitlistForm = {
+  action: 'https://docs.google.com/forms/d/e/1FAIpQLSdrrnkq1rquVBQoL3hnnYaD9opUbVixoztI3ETjmDIr2t6YiA/formResponse',
+  email: 'emailAddress',
+  name: 'entry.1787431862',
+  location: 'entry.2141923680',
+};
+
+// Suggestions for the location field; people can still type any town.
+export const locations = [
+  'London', 'Birmingham', 'Manchester', 'Leeds', 'Liverpool', 'Bristol',
+  'Sheffield', 'Nottingham', 'Leicester', 'Coventry', 'Newcastle', 'Glasgow',
+  'Edinburgh', 'Cardiff', 'Belfast',
+];
+
 export const contact = {
   email: 'info@getdusty.co.uk',
   phoneDisplay: '+44 7598 833724',

@@ -2,7 +2,7 @@
 // A port of the original site (adeolade1st/getDusty-Live-Final, src/App.tsx):
 // same layout, classes and copy, with the app's logo and our own links/data.
 import Layout from '../layouts/Layout.astro';
-import { links, contact, stats, testimonials, heroImages } from '../data/site';
+import { links, contact, stats, testimonials, heroImages, waitlistForm, locations } from '../data/site';
 import {
   Menu, X, Sparkles, CircleCheck, Users, Calendar, House,
   Star, MapPin, Mail, Phone, ChevronLeft, ChevronRight,
@@ -374,16 +374,80 @@ const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-tex
               ))}
             </div>
 
-            <a
-              id="early-access"
-              href={links.customerWaitlist}
-              target="_blank"
-              rel="noopener noreferrer"
-              class={`scroll-mt-40 inline-flex items-center justify-center gap-2 ${gradientBtn} font-bold py-4 px-8 rounded-xl shadow-lg shadow-violet-200 hover:shadow-xl hover:shadow-violet-300 transition-all duration-200`}
-            >
-              <Sparkles size={18} />
-              Get Early Access to App
-            </a>
+            <div id="early-access" class="scroll-mt-40">
+              <button
+                type="button"
+                id="early-access-toggle"
+                aria-expanded="false"
+                aria-controls="early-access-panel"
+                class={`w-full inline-flex items-center justify-center gap-2 ${gradientBtn} font-bold py-4 px-8 rounded-xl shadow-lg shadow-violet-200 hover:shadow-xl hover:shadow-violet-300 transition-all duration-200`}
+              >
+                <Sparkles size={18} />
+                Get Early Access to App
+              </button>
+
+              <div id="early-access-panel" hidden class="mt-4 bg-white rounded-2xl border-2 border-violet-200 p-6 shadow-lg shadow-violet-100/50">
+                <form id="early-access-form" action={waitlistForm.action} method="POST" target="_blank" class="flex flex-col gap-4">
+                  <p class="text-sm text-gray-600 leading-relaxed">
+                    Be first to try Dusty when it launches near you. We'll only email you about early access.
+                  </p>
+                  <label class="flex flex-col gap-1.5">
+                    <span class="text-sm font-semibold text-gray-800">Email</span>
+                    <input
+                      type="email"
+                      name={waitlistForm.email}
+                      required
+                      autocomplete="email"
+                      placeholder="you@example.com"
+                      class="rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-violet-500 focus:ring-2 focus:ring-violet-200 outline-none"
+                    />
+                  </label>
+                  <label class="flex flex-col gap-1.5">
+                    <span class="text-sm font-semibold text-gray-800">Preferred name</span>
+                    <input
+                      type="text"
+                      name={waitlistForm.name}
+                      required
+                      autocomplete="given-name"
+                      placeholder="What should we call you?"
+                      class="rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-violet-500 focus:ring-2 focus:ring-violet-200 outline-none"
+                    />
+                  </label>
+                  <label class="flex flex-col gap-1.5">
+                    <span class="text-sm font-semibold text-gray-800">Location</span>
+                    <input
+                      type="text"
+                      name={waitlistForm.location}
+                      required
+                      list="early-access-locations"
+                      autocomplete="address-level2"
+                      placeholder="e.g. Birmingham, London"
+                      class="rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-violet-500 focus:ring-2 focus:ring-violet-200 outline-none"
+                    />
+                    <datalist id="early-access-locations">
+                      {locations.map((city) => <option value={city} />)}
+                    </datalist>
+                  </label>
+                  <button
+                    type="submit"
+                    class={`inline-flex items-center justify-center gap-2 ${gradientBtn} font-bold py-3.5 px-6 rounded-xl shadow-md shadow-violet-200 transition-all duration-200 disabled:opacity-60 disabled:cursor-wait`}
+                  >
+                    Join Early Access <ArrowRight size={18} />
+                  </button>
+                  <p data-error hidden class="text-sm text-red-600" role="alert">
+                    Something went wrong. Please try again, or <a href={links.customerWaitlist} target="_blank" rel="noopener noreferrer" class="underline">use our sign-up form</a>.
+                  </p>
+                </form>
+
+                <div id="early-access-done" hidden class="text-center py-4" role="status" tabindex="-1">
+                  <div class="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-violet-600 to-purple-700 rounded-full flex items-center justify-center">
+                    <CircleCheck class="text-white" size={24} />
+                  </div>
+                  <p class="text-lg font-bold text-gray-900 mb-1">You're on the list!</p>
+                  <p class="text-sm text-gray-600">We'll email you as soon as Dusty is ready in your area.</p>
+                </div>
+              </div>
+            </div>
 
             <div>
               <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
@@ -546,4 +610,39 @@ const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-tex
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
     setInterval(() => show(current + 1), 5000);
   }
+
+  // Early access form: opens under its button, and is open already when the
+  // page is visited via #early-access
+  const eaToggle = document.getElementById('early-access-toggle')!;
+  const eaPanel = document.getElementById('early-access-panel')!;
+  const eaForm = document.getElementById('early-access-form') as HTMLFormElement;
+  const eaDone = document.getElementById('early-access-done')!;
+  const eaError = eaForm.querySelector<HTMLElement>('[data-error]')!;
+  const setPanel = (open: boolean) => {
+    eaPanel.hidden = !open;
+    eaToggle.setAttribute('aria-expanded', String(open));
+  };
+  eaToggle.addEventListener('click', () => {
+    setPanel(eaPanel.hidden);
+    if (!eaPanel.hidden) eaForm.querySelector('input')?.focus();
+  });
+  if (location.hash === '#early-access') setPanel(true);
+
+  // Google Forms sends no CORS headers, so the response can't be read; a
+  // request that completes without a network error counts as sent.
+  eaForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submit = eaForm.querySelector<HTMLButtonElement>('[type=submit]')!;
+    submit.disabled = true;
+    eaError.hidden = true;
+    try {
+      await fetch(eaForm.action, { method: 'POST', mode: 'no-cors', body: new FormData(eaForm) });
+      eaForm.hidden = true;
+      eaDone.hidden = false;
+      eaDone.focus();
+    } catch {
+      eaError.hidden = false;
+      submit.disabled = false;
+    }
+  });
 </script>
