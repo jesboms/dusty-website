@@ -146,9 +146,8 @@ const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-tex
           </p>
           <div class="flex flex-col sm:flex-row gap-3">
             <a
-              href={links.customerWaitlist}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#early-access"
+              data-early-access
               class={`inline-flex items-center justify-center gap-2 ${gradientBtn} font-bold py-4 px-8 rounded-xl shadow-lg shadow-violet-200 hover:shadow-xl hover:shadow-violet-300 transition-all duration-200 text-base sm:text-lg`}
             >
               <Sparkles size={20} />
@@ -558,9 +557,8 @@ const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-tex
           <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p class="text-gray-500 text-sm">&copy; {year} Dusty. All rights reserved.</p>
             <a
-              href={links.customerWaitlist}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#early-access"
+              data-early-access
               class={`inline-flex items-center justify-center gap-2 ${gradientBtn} font-semibold py-2.5 px-6 rounded-lg shadow-md shadow-violet-900/30 transition-all duration-200 text-sm`}
             >
               <Sparkles size={14} />
@@ -627,6 +625,8 @@ const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-tex
     if (!eaPanel.hidden) eaForm.querySelector('input')?.focus();
   });
   if (location.hash === '#early-access') setPanel(true);
+  // Other "Join our waitlist" buttons scroll here and open it
+  document.querySelectorAll('[data-early-access]').forEach((a) => a.addEventListener('click', () => setPanel(true)));
 
   // Google Forms sends no CORS headers, so the response can't be read; a
   // request that completes without a network error counts as sent.
