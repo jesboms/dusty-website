@@ -11,6 +11,11 @@
 // 6 years for booking records) are what the code does; confirm them.
 import TextPage from '../layouts/TextPage.astro';
 import { company, contact } from '../data/site';
+import { filled } from '../data/filled';
+
+const number = filled(company.number);
+const office = filled(company.registeredOffice);
+const ico = filled(company.icoNumber);
 ---
 
 <TextPage
@@ -26,9 +31,9 @@ import { company, contact } from '../data/site';
   <h2 id="who-we-are">1. Who we are</h2>
   <p>
     Dusty is run by <strong>{company.legalName}</strong> (trading as {company.tradingName}), a company registered in
-    England and Wales, company number {company.number}, registered office {company.registeredOffice}. We are the
-    data controller for the personal data described here. We are registered with the Information Commissioner's
-    Office (ICO), registration number {company.icoNumber}.
+    England and Wales{number && <>, company number {number}</>}{office && <>, registered office {office}</>}. We are
+    the data controller for the personal data described here. We are registered with the Information Commissioner's
+    Office (ICO){ico && <>, registration number {ico}</>}.
   </p>
   <p>
     Questions about your data, or a request to use any of your rights: email

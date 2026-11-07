@@ -16,6 +16,10 @@
 //     match how the business actually works, and the cleaner contract.
 import TextPage from '../layouts/TextPage.astro';
 import { company, contact } from '../data/site';
+import { filled } from '../data/filled';
+
+const number = filled(company.number);
+const office = filled(company.registeredOffice);
 ---
 
 <TextPage
@@ -30,8 +34,8 @@ import { company, contact } from '../data/site';
 
   <h2 id="about">1. About Dusty</h2>
   <p>
-    Dusty is run by <strong>{company.legalName}</strong> (trading as {company.tradingName}), company number
-    {company.number}, registered office {company.registeredOffice}. Contact us at
+    Dusty is run by <strong>{company.legalName}</strong> (trading as {company.tradingName}){number && <>, company
+    number {number}</>}{office && <>, registered office {office}</>}. Contact us at
     <a href={`mailto:${contact.email}`}>{contact.email}</a>.
   </p>
   <p>
