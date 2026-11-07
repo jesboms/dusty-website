@@ -35,7 +35,7 @@ const office = filled(company.registeredOffice);
   <h2 id="about">1. About Dusty</h2>
   <p>
     Dusty is run by <strong>{company.legalName}</strong> (trading as {company.tradingName}){number && <>, company
-    number {number}</>}{office && <>, registered office {office}</>}. Contact us at
+    number {number}</>}{office && <>, registered office {office}</>}. Contact us at{' '}
     <a href={`mailto:${contact.email}`}>{contact.email}</a>.
   </p>
   <p>
