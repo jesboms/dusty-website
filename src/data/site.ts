@@ -40,8 +40,8 @@ export const locations = [
 export const company = {
   legalName: 'Wiseman Central Limited',
   tradingName: 'Dusty',
-  number: '[FILL IN: company number]',
-  registeredOffice: '[FILL IN: registered office address]',
+  number: '17013890',
+  registeredOffice: '124 City Road, London, EC1V 2NX',
   icoNumber: '[FILL IN: ICO registration number]',
 };
 
