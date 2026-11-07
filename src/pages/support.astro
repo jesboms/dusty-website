@@ -1,0 +1,107 @@
+---
+// Support page: the App Store listing's Support URL, so /support must not
+// change. Answers here describe how the app works (dusty repo, 2026-11-03).
+import TextPage from '../layouts/TextPage.astro';
+import { contact, links } from '../data/site';
+---
+
+<TextPage title="Help and support" description="Get help with Dusty: bookings, payments, cancellations, your account and safety.">
+  <div class="mt-8 rounded-2xl bg-violet-50 border border-violet-100 p-6">
+    <p class="!mb-2 font-semibold text-gray-900">Contact us</p>
+    <p class="!mb-1">
+      Email <a href={`mailto:${contact.email}`}>{contact.email}</a>
+    </p>
+    <p class="!mb-1">
+      WhatsApp or call <a href={links.whatsapp}>{contact.phoneDisplay}</a>
+    </p>
+    <p class="!mb-0 text-sm text-gray-600">
+      We aim to reply within one working day. In the app, go to Account → Contact us. If someone is in danger, call 999
+      first.
+    </p>
+  </div>
+
+  <h2 id="booking">Booking</h2>
+  <h3>How do I book a cleaner?</h3>
+  <p>
+    Open the Book tab, choose the type of clean, the day and the time, and tap Find my cleaner. Or tap Describe it and
+    tell Ask Dusty what you need in your own words. You'll see your best match, with their price and reviews, before
+    you book.
+  </p>
+  <h3>When will the cleaner reply?</h3>
+  <p>
+    Cleaners get a notification straight away and usually reply within a few hours. If they decline or don't reply in
+    time, the request is cancelled, your card hold is released and you can book someone else.
+  </p>
+  <h3>Can I message my cleaner?</h3>
+  <p>
+    Yes. Open the booking to message or call them. Calls go through Dusty's number, so neither of you sees the other's
+    phone number. You can also ask a cleaner a question before you book.
+  </p>
+  <h3>Is Dusty in my area?</h3>
+  <p>
+    We're starting in Birmingham, Coventry and the West Midlands. If Dusty can't find a cleaner near you yet,
+    <a href="/#early-access">join the waitlist</a> and we'll tell you when we arrive.
+  </p>
+
+  <h2 id="payment">Payment</h2>
+  <h3>When am I charged?</h3>
+  <p>
+    When you book, we put a hold on your card for the price shown. You're only charged once the cleaner marks the
+    clean as done. If the booking doesn't go ahead, the hold is released. Your bank may take a few days to show it.
+  </p>
+  <h3>What appears on my bank statement?</h3>
+  <p>Payments show as DUSTY.</p>
+  <h3>How do points work?</h3>
+  <p>Every 250 points gives you £10 off a booking. You can choose to use them when you book.</p>
+
+  <h2 id="cancelling">Cancelling and changes</h2>
+  <h3>How do I cancel or reschedule?</h3>
+  <p>Open the booking in the Bookings tab. You can cancel it or ask to move it to another time from there.</p>
+  <h3>Is there a fee?</h3>
+  <p>
+    Cancelling is free until 48 hours before the start (24 hours for a repeat clean). After that, the late cancellation
+    fee is 50% of the price, because the cleaner kept that time free for you. If the cleaner cancels, you're never
+    charged. See our <a href="/terms#customers">terms</a> for the details.
+  </p>
+  <h3>Something went wrong with my clean</h3>
+  <p>
+    Tell us within 48 hours at <a href={`mailto:${contact.email}`}>{contact.email}</a>, with photos if you can.
+    We'll look into it with you and the cleaner.
+  </p>
+
+  <h2 id="safety">Safety</h2>
+  <h3>How are cleaners checked?</h3>
+  <p>
+    Every cleaner uploads ID, right to work and proof of address, and our team checks them by hand before the cleaner
+    can take a booking. Cleaners with insurance show an Insured badge on their profile.
+  </p>
+  <h3>How do I report or block someone?</h3>
+  <p>
+    In a message thread or on someone's profile, use the report or block option. Blocking cancels any
+    bookings between you that haven't started, free of charge. Our team reviews every report.
+  </p>
+
+  <h2 id="cleaners">For cleaners</h2>
+  <h3>How do I join?</h3>
+  <p>
+    Download Dusty, choose "Clean for Dusty", set your rate, services, area and hours, and upload your documents. We
+    usually check them within 2 working days.
+  </p>
+  <h3>When do I get paid?</h3>
+  <p>
+    After each clean you complete, you receive the price minus Dusty's 20% commission, paid to your bank through
+    Stripe. Set up payouts in the app first.
+  </p>
+
+  <h2 id="account">Your account</h2>
+  <h3>I forgot my password</h3>
+  <p>On the sign-in screen, tap Forgot password? and we'll email you a link.</p>
+  <h3>How do I delete my account?</h3>
+  <p>
+    In the app, go to Account → Delete account. You'll be signed out straight away and have 30 days to change your
+    mind by signing back in. After that your account is erased. You can't delete it while a booking is in progress.
+    Our <a href="/privacy#retention">privacy policy</a> explains what we have to keep.
+  </p>
+  <h3>Can I get a copy of my data?</h3>
+  <p>Yes. Email <a href={`mailto:${contact.email}`}>{contact.email}</a> and we'll send it within one month.</p>
+</TextPage>

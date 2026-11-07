@@ -1,0 +1,169 @@
+---
+// Terms of use. Linked from the app's sign-up screen, so the URL /terms must
+// not change.
+//
+// Written from how the app works (dusty repo, 2026-11-03): the hold-then-
+// charge payment, 20% commission, the 48-hour / 50% late cancellation fee and
+// its split, points and referrals. If any of those change in the code, change
+// them here too.
+//
+// NOT REVIEWED BY A LAWYER. Two things to check before relying on it:
+//  1. The 14-day cooling-off right (Consumer Contracts Regulations 2013)
+//     against the 48-hour (24 for repeat cleans) late cancellation fee, in "Your legal right to
+//     cancel" below. A fee charged before any work starts may not be
+//     enforceable inside the 14 days.
+//  2. The cleaners' section, which describes them as self-employed. It should
+//     match how the business actually works, and the cleaner contract.
+import TextPage from '../layouts/TextPage.astro';
+import { company, contact } from '../data/site';
+import { filled } from '../data/filled';
+
+const number = filled(company.number);
+const office = filled(company.registeredOffice);
+---
+
+<TextPage
+  title="Terms of use"
+  description="The terms for using Dusty to book cleaners, or to find cleaning work."
+  updated="3 November 2026"
+>
+  <p class="mt-8">
+    These terms apply when you use the Dusty app or website. By creating an account you agree to them, so please read
+    them. Our <a href="/privacy">privacy policy</a> explains how we use your data.
+  </p>
+
+  <h2 id="about">1. About Dusty</h2>
+  <p>
+    Dusty is run by <strong>{company.legalName}</strong> (trading as {company.tradingName}){number && <>, company
+    number {number}</>}{office && <>, registered office {office}</>}. Contact us at
+    <a href={`mailto:${contact.email}`}>{contact.email}</a>.
+  </p>
+  <p>
+    Dusty is a marketplace. We introduce customers who need a clean to independent, self-employed cleaners, and we
+    handle booking, messaging and payment. <strong>The cleaning itself is a service from the cleaner to the
+    customer.</strong> Cleaners aren't our employees, and they choose which jobs to take.
+  </p>
+
+  <h2 id="accounts">2. Your account</h2>
+  <ul>
+    <li>You must be 18 or over and live in the UK.</li>
+    <li>Give accurate details and keep them up to date. We ask you to verify your mobile number.</li>
+    <li>Keep your password private. You're responsible for what happens on your account.</li>
+    <li>One person per account.</li>
+    <li>You can delete your account at any time in the app (Account → Delete account). See our <a href="/privacy#retention">privacy policy</a> for what happens next.</li>
+  </ul>
+
+  <h2 id="customers">3. Booking a clean (customers)</h2>
+
+  <h3>How a booking works</h3>
+  <ul>
+    <li>You choose a service, a day and a time. Dusty suggests a cleaner who covers your area and is free then, and shows you their price before you book. Or, for larger homes, you post the job and cleaners send you their price.</li>
+    <li>When you request a booking, we place a <strong>hold</strong> on your card for the price shown. You're not charged yet.</li>
+    <li>The cleaner then accepts or declines. If they decline, or don't answer in time, the booking is cancelled and the hold is released.</li>
+    <li>Once the cleaner marks the clean as done, we charge your card for the price you agreed.</li>
+    <li>For repeat cleans, we use your saved card for each clean, a few days before it. If the payment can't be taken by 48 hours before a clean, that clean is skipped and you're not charged.</li>
+  </ul>
+
+  <h3>Price</h3>
+  <p>
+    The price shown when you book is the total you pay, including Dusty's fee. It's based on the cleaner's
+    rate and our estimate of the time your home needs. If the job turns out much bigger than you described, the
+    cleaner can talk to you about it, but can't charge you more without your agreement.
+  </p>
+
+  <h3>Your home</h3>
+  <p>
+    Describe your home and the job accurately, make sure the cleaner can get in at the agreed time, and tell them
+    about anything they should know, such as pets or fragile items. Keep valuables, cash and medicines out of the
+    way.
+  </p>
+
+  <h3>Cancelling a booking</h3>
+  <ul>
+    <li><strong>Before the cleaner accepts:</strong> free.</li>
+    <li><strong>More than 48 hours before the start</strong> (24 hours for a repeat clean): free. The hold is released.</li>
+    <li><strong>Within 48 hours of the start</strong> (24 hours for a repeat clean): a late cancellation fee of <strong>50% of the price</strong>. Part of it goes to the cleaner, who kept the time free for you.</li>
+    <li><strong>If the cleaner cancels</strong>, it's always free for you, and you can book someone else.</li>
+  </ul>
+
+  <h3 id="cooling-off">Your legal right to cancel</h3>
+  <p>
+    By law you can cancel a booking within 14 days of making it. If you book a clean that takes place within those
+    14 days, you're asking for the service to start during that time. If you cancel after the clean has been done,
+    you'll pay for the clean in full. This doesn't affect your other legal rights.
+  </p>
+
+  <h3>If something goes wrong</h3>
+  <p>
+    If you're not happy with a clean, or something is damaged or missing, tell us within 48 hours through the app or
+    at <a href={`mailto:${contact.email}`}>{contact.email}</a>, with photos if you can. We'll look into it with you
+    and the cleaner, and if the clean wasn't done properly we may refund some or all of the price. Claims for damage
+    are between you and the cleaner, and many cleaners have their own insurance (shown on their profile). We'll help
+    you reach them and share what we know.
+  </p>
+
+  <h2 id="cleaners">4. Taking jobs (cleaners)</h2>
+  <ul>
+    <li><strong>You're self-employed.</strong> You set your own rate, services, working area and hours, and you choose which requests to accept. You can work for other people and platforms. You're responsible for your own tax and National Insurance.</li>
+    <li><strong>Verification.</strong> Before you can take bookings, you upload ID, right to work and proof of address, and our team checks them. Keep them in date. We'll remind you before they expire.</li>
+    <li><strong>Insurance.</strong> We strongly recommend public liability insurance. If you upload a certificate, customers see that you're insured.</li>
+    <li><strong>Doing the job.</strong> Once you accept a booking, turn up on time, do the clean you agreed to a good standard, and look after the customer's home and belongings.</li>
+    <li><strong>Getting paid.</strong> You receive the job price minus Dusty's commission of <strong>20%</strong>, paid to your bank account through Stripe after the clean is done. You need to finish Stripe's payout setup first.</li>
+    <li><strong>Late cancellations by the customer.</strong> If a customer cancels inside the late cancellation window (48 hours, or 24 for a repeat clean), you receive 20% of the job price (40% of the fee they pay).</li>
+    <li><strong>Cancelling.</strong> If you have to cancel an accepted booking, do it as early as possible in the app. Cancelling often, or not turning up, may lead to your account being paused.</li>
+  </ul>
+
+  <h2 id="conduct">5. Using Dusty fairly</h2>
+  <p>Everyone using Dusty agrees to:</p>
+  <ul>
+    <li>be respectful. No harassment, discrimination, threats, or sexual or offensive messages</li>
+    <li>keep payments for jobs found through Dusty inside Dusty. Don't arrange to pay or be paid outside the app, or swap contact details to do so</li>
+    <li>be honest in your profile, bookings and reviews</li>
+    <li>not misuse the app, try to get around its safety features, or use someone else's account</li>
+  </ul>
+  <p>
+    You can report or block anyone in the app. We may pause or close an account that breaks these terms, puts someone
+    at risk, or is used for fraud, and we'll tell you why unless the law or safety stops us.
+  </p>
+
+  <h2 id="reviews">6. Reviews and ratings</h2>
+  <p>
+    Customers can review a cleaner after a completed booking, and cleaners can rate customers. Reviews must be honest
+    and about the booking. We may remove reviews that break these terms, but we don't remove a review because it's
+    negative.
+  </p>
+
+  <h2 id="points">7. Points and referrals</h2>
+  <p>
+    Customers can earn points, and every 250 points can be used for £10 off a booking. Points have no cash value,
+    can't be transferred, and are lost if your account is deleted. We may cancel points earned through misuse, such
+    as fake referrals. We'll give you reasonable notice before changing how points work.
+  </p>
+
+  <h2 id="ai">8. Ask Dusty</h2>
+  <p>
+    Ask Dusty uses AI to understand what you need and suggest a cleaner. It can make mistakes, so check the service,
+    date, time and price before you book. A booking only happens when you confirm it and the cleaner accepts.
+  </p>
+
+  <h2 id="liability">9. Our responsibility to you</h2>
+  <ul>
+    <li>We provide the Dusty app with reasonable care and skill. We can't promise it will always be available or free of errors, and we may change features.</li>
+    <li>We check cleaners' documents before they can take bookings, but we don't supervise their work. The cleaner is responsible for the clean and for any damage they cause.</li>
+    <li>We're not responsible for losses that weren't foreseeable, or for business losses.</li>
+    <li>Nothing in these terms limits our responsibility for death or personal injury caused by our negligence, for fraud, or for anything else the law doesn't allow us to limit. Your legal rights as a consumer aren't affected.</li>
+  </ul>
+
+  <h2 id="changes">10. Changes to these terms</h2>
+  <p>
+    We may update these terms, for example when we add features or the law changes. We'll tell you in the app or by
+    email before an important change takes effect. If you don't agree, you can delete your account.
+  </p>
+
+  <h2 id="law">11. Complaints and law</h2>
+  <p>
+    If you have a complaint, email <a href={`mailto:${contact.email}`}>{contact.email}</a> and we'll reply within 5
+    working days. These terms are governed by the law of England and Wales. If you live in Scotland or Northern
+    Ireland, you can also bring a claim in your local courts.
+  </p>
+</TextPage>

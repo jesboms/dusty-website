@@ -1,0 +1,51 @@
+---
+// Plain reading layout for the privacy policy, terms and support pages:
+// the logo back to the home page, a title, and the page's text.
+import Layout from './Layout.astro';
+import { contact } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  /** "Last updated" date shown under the title, e.g. "3 November 2026". */
+  updated?: string;
+}
+
+const { title, description, updated } = Astro.props;
+const year = new Date().getFullYear();
+const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-text text-transparent';
+---
+
+<Layout title={`${title} | Dusty`} description={description}>
+  <div class="min-h-screen bg-white text-gray-900 flex flex-col">
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
+      <nav class="max-w-3xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2.5">
+          <img src="/logo.png" alt="" width="40" height="40" class="h-10 w-10 rounded-lg" />
+          <span class={`text-2xl font-extrabold tracking-tight ${gradientText}`}>Dusty</span>
+        </a>
+        <a href="/support" class="text-sm font-medium text-gray-600 hover:text-violet-700">Help</a>
+      </nav>
+    </header>
+
+    <main class="flex-1 px-4 sm:px-6 py-12 md:py-16">
+      <article class="legal max-w-3xl mx-auto">
+        <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">{title}</h1>
+        {updated && <p class="text-sm text-gray-500 mt-3">Last updated {updated}</p>}
+        <slot />
+      </article>
+    </main>
+
+    <footer class="border-t border-gray-100 px-4 sm:px-6 py-8">
+      <div class="max-w-3xl mx-auto flex flex-col sm:flex-row gap-4 justify-between text-sm text-gray-500">
+        <p>&copy; {year} Dusty</p>
+        <nav aria-label="Legal" class="flex flex-wrap gap-5">
+          <a href="/privacy" class="hover:text-violet-700">Privacy</a>
+          <a href="/terms" class="hover:text-violet-700">Terms</a>
+          <a href="/support" class="hover:text-violet-700">Support</a>
+          <a href={`mailto:${contact.email}`} class="hover:text-violet-700">{contact.email}</a>
+        </nav>
+      </div>
+    </footer>
+  </div>
+</Layout>

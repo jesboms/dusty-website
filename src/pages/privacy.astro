@@ -1,0 +1,229 @@
+---
+// Privacy policy. Linked from the app (sign-in screen, Ask Dusty's AI notice)
+// and from the App Store listing, so the URL /privacy must not change.
+//
+// Written from what the app actually does (dusty repo, 2026-11-03). When the
+// app starts collecting something new, or a new company handles data (e.g.
+// PostHog analytics), update this page and the App Store privacy label
+// (dusty/docs/app-store-submission.md §4) together.
+//
+// Not reviewed by a lawyer. The retention periods (30-day restore window,
+// 6 years for booking records) are what the code does; confirm them.
+import TextPage from '../layouts/TextPage.astro';
+import { company, contact } from '../data/site';
+import { filled } from '../data/filled';
+
+const number = filled(company.number);
+const office = filled(company.registeredOffice);
+const ico = filled(company.icoNumber);
+---
+
+<TextPage
+  title="Privacy policy"
+  description="How Dusty collects, uses and protects your personal data."
+  updated="3 November 2026"
+>
+  <p class="mt-8">
+    This policy explains what personal data Dusty collects when you use our app and website, why we collect it, who
+    we share it with, how long we keep it, and your rights. Please read it alongside our <a href="/terms">terms</a>.
+  </p>
+
+  <h2 id="who-we-are">1. Who we are</h2>
+  <p>
+    Dusty is run by <strong>{company.legalName}</strong> (trading as {company.tradingName}), a company registered in
+    England and Wales{number && <>, company number {number}</>}{office && <>, registered office {office}</>}. We are
+    the data controller for the personal data described here. We are registered with the Information Commissioner's
+    Office (ICO){ico && <>, registration number {ico}</>}.
+  </p>
+  <p>
+    Questions about your data, or a request to use any of your rights: email
+    <a href={`mailto:${contact.email}`}>{contact.email}</a>.
+  </p>
+
+  <h2 id="what-we-collect">2. What we collect</h2>
+
+  <h3>Everyone with an account</h3>
+  <ul>
+    <li><strong>Account details:</strong> your name, email address, password (stored encrypted by our authentication provider; we can't see it) and whether you're a customer or a cleaner.</li>
+    <li><strong>Mobile number:</strong> verified by text message. It's used for calls about a booking through Dusty's own number, so the other person never sees your number.</li>
+    <li><strong>Profile photo</strong>, if you add one.</li>
+    <li><strong>Messages</strong> you send to other users in the app, and enquiries before a booking.</li>
+    <li><strong>Reports and blocks</strong> you make, or that are made about you.</li>
+    <li><strong>Device information:</strong> a push notification token so we can send you notifications, and crash reports (the type of phone, app version and what went wrong, not who you are).</li>
+    <li><strong>What you send us</strong> when you contact support.</li>
+  </ul>
+
+  <h3>Customers</h3>
+  <ul>
+    <li><strong>Your homes:</strong> address, postcode, type of property, number of bedrooms and bathrooms, access instructions, pets, and what products and equipment you have.</li>
+    <li><strong>Bookings:</strong> the service, date and time, price, notes and any photos you add for your cleaner, and the booking's history.</li>
+    <li><strong>Payment:</strong> your card is entered into Stripe's secure payment form. Stripe stores it; we only see the card type, last four digits and expiry date.</li>
+    <li><strong>What you type to Ask Dusty</strong>, our AI booking assistant (see <a href="#ai">section 5</a>).</li>
+    <li><strong>Reviews</strong> you write, and <strong>ratings</strong> cleaners give you after a clean (four yes/no questions, such as whether the home was ready on time).</li>
+    <li><strong>Points and referrals:</strong> your points balance and history, and your referral code.</li>
+  </ul>
+
+  <h3>Cleaners</h3>
+  <ul>
+    <li><strong>Work profile:</strong> your bio, hourly rate, services, the area you cover (a base location and distance), working hours and days off.</li>
+    <li><strong>Verification documents:</strong> photos of your ID, right to work and proof of address, the dates on them, and our team's decision.</li>
+    <li><strong>Insurance certificate</strong>, if you upload one.</li>
+    <li><strong>Payouts:</strong> you set up payouts with Stripe, which collects your bank details and identity information directly. We see whether payouts are set up, not your full bank details.</li>
+    <li><strong>Jobs:</strong> bookings, bids, start and finish times, problems you report on a job, and your earnings.</li>
+  </ul>
+
+  <h3>What we don't collect</h3>
+  <p>
+    The app doesn't read your phone's location. It works from the postcode of your home or your work area. We don't
+    record calls, use advertising trackers, or sell your data.
+  </p>
+
+  <h3>Website</h3>
+  <p>
+    If you join our waitlist on getdusty.co.uk, we collect your name, email address and town through Google Forms. The
+    website doesn't use cookies or analytics.
+  </p>
+
+  <h2 id="how-we-use-it">3. How we use it, and our legal basis</h2>
+  <table>
+    <thead>
+      <tr><th>What we do</th><th>Legal basis (UK GDPR)</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Create your account, match customers with cleaners, run bookings, take payments and pay cleaners, send booking notifications and emails</td>
+        <td>Contract: we need it to provide the service you signed up for</td>
+      </tr>
+      <tr>
+        <td>Check cleaners' identity and documents before they can take bookings</td>
+        <td>Legitimate interests: keeping customers safe in their homes</td>
+      </tr>
+      <tr>
+        <td>Automatically block contact details and offensive words in messages; look into reports; suspend accounts that break our terms</td>
+        <td>Legitimate interests: safety, and stopping fraud and payments outside the app</td>
+      </tr>
+      <tr>
+        <td>Send what you type to Ask Dusty to our AI provider</td>
+        <td>Consent, which the app asks for before your first message. You can book with the form instead</td>
+      </tr>
+      <tr>
+        <td>Keep booking and payment records</td>
+        <td>Legal obligation: company and tax record-keeping</td>
+      </tr>
+      <tr>
+        <td>Fix crashes and improve the app</td>
+        <td>Legitimate interests: a reliable app</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    <strong>Our team reading messages.</strong> Messages are private between you and the other person. Our team only
+    opens a conversation for a reason: a report, a safety concern, a payment dispute or a legal request. Every time
+    they do, it's logged.
+  </p>
+
+  <h2 id="sharing">4. Who we share it with</h2>
+  <p>
+    <strong>The other person on a booking.</strong> A cleaner you book sees your name, the home's address and
+    access instructions, your notes and photos, and your rating as a customer. A customer sees a cleaner's name,
+    photo, bio, rate, reviews and approximate distance. Neither sees the other's phone number or email address.
+  </p>
+  <p><strong>Companies that run parts of Dusty for us.</strong> They may only use your data to provide their service to us:</p>
+  <table>
+    <thead>
+      <tr><th>Company</th><th>What for</th><th>Where</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Supabase</td><td>Database, file storage and sign-in</td><td>EU</td></tr>
+      <tr><td>Fly.io</td><td>Our servers</td><td>UK (London)</td></tr>
+      <tr><td>Stripe</td><td>Card payments, and cleaners' payouts and identity checks for payouts</td><td>UK, EU and USA</td></tr>
+      <tr><td>Anthropic</td><td>The AI behind Ask Dusty, and the one-line explanation of why a cleaner was matched</td><td>USA</td></tr>
+      <tr><td>Twilio</td><td>Texting verification codes, and connecting calls through Dusty's number</td><td>USA</td></tr>
+      <tr><td>Resend</td><td>Sending emails</td><td>USA / EU</td></tr>
+      <tr><td>Expo and Apple</td><td>Push notifications</td><td>USA</td></tr>
+      <tr><td>Sentry</td><td>Crash reports</td><td>EU (Germany)</td></tr>
+      <tr><td>postcodes.io</td><td>Turning a postcode into a map position (only the postcode is sent)</td><td>UK</td></tr>
+      <tr><td>Google</td><td>Website waitlist form</td><td>USA / EU</td></tr>
+    </tbody>
+  </table>
+  <p>
+    Where data goes outside the UK, it's protected by the safeguards UK law requires, such as the UK–US data bridge or
+    the ICO's International Data Transfer Addendum.
+  </p>
+  <p>
+    <strong>Others, only when we have to:</strong> the police or other authorities when the law requires it, our
+    professional advisers, or a buyer if the business is ever sold (they'd be bound by this policy).
+  </p>
+
+  <h2 id="ai">5. Ask Dusty and AI</h2>
+  <p>
+    Ask Dusty lets you describe the clean you need in your own words. To understand it, we send
+    <strong>Anthropic</strong> (the company behind the Claude AI) what you type in Ask Dusty, plus your home's type
+    and number of bedrooms. We don't send your name, email, phone number or address. The app asks your permission
+    before your first message, and you can always book with the form instead, which sends nothing you type to an AI.
+  </p>
+  <p>
+    When we show you a match, we also send Anthropic the cleaner's first name, rating, rate and distance, so it can
+    write one sentence about why they suit your booking.
+  </p>
+  <p>
+    Anthropic processes this for us under a data processing agreement. It doesn't use it to train its AI. The AI
+    suggests a cleaner; it never books one or makes a decision about you. You and the cleaner both choose.
+  </p>
+
+  <h2 id="retention">6. How long we keep it</h2>
+  <ul>
+    <li><strong>While you have an account,</strong> we keep what's needed to run it.</li>
+    <li>
+      <strong>When you delete your account</strong> (Account → Delete account in the app): your account is hidden
+      and you're signed out straight away, and a cleaner's ID and verification documents are deleted that day. You
+      have <strong>30 days</strong> to change your mind by signing in. After 30 days we erase your account.
+    </li>
+    <li>
+      <strong>Booking and payment records are kept for 6 years</strong>, because UK company and tax law requires
+      it. When your account is erased, we remove your name, photo, homes and other personal details from those
+      records and keep only what the law needs. Messages about a booking are kept with it, in case of a dispute,
+      and erased when the 6 years are up. Messages that weren't about a booking are erased with your account.
+    </li>
+    <li>
+      <strong>Legal hold:</strong> if we're dealing with a dispute, claim or legal request involving you, we may keep
+      the relevant data until it's resolved.
+    </li>
+    <li><strong>Crash reports</strong> are deleted automatically within 90 days.</li>
+  </ul>
+
+  <h2 id="rights">7. Your rights</h2>
+  <p>Under UK data protection law you can ask us to:</p>
+  <ul>
+    <li>give you a copy of your personal data</li>
+    <li>correct anything that's wrong</li>
+    <li>delete your data (you can also do this yourself in the app)</li>
+    <li>restrict or object to how we use it</li>
+    <li>give you your data in a format you can move to another service</li>
+    <li>withdraw your consent for Ask Dusty, by not using it. Tell us if you'd like the setting on your phone reset</li>
+  </ul>
+  <p>
+    Email <a href={`mailto:${contact.email}`}>{contact.email}</a>. We'll reply within one month. It's free.
+  </p>
+  <p>
+    If you're unhappy with how we've handled your data, you can complain to the Information Commissioner's Office at
+    <a href="https://ico.org.uk/make-a-complaint/">ico.org.uk/make-a-complaint</a> or on 0303 123 1113. We'd
+    appreciate the chance to put it right first.
+  </p>
+
+  <h2 id="security">8. Security</h2>
+  <p>
+    Data is encrypted in transit and at rest. Verification documents are kept in private storage that only our
+    verification team can open. Access inside Dusty is limited to the people who need it, and staff access to
+    private messages is logged.
+  </p>
+
+  <h2 id="age">9. Age</h2>
+  <p>Dusty is for people aged 18 and over. We don't knowingly collect data from anyone younger.</p>
+
+  <h2 id="changes">10. Changes</h2>
+  <p>
+    If we change this policy, we'll update the date at the top. If the change matters, such as a new use of your
+    data, we'll tell you in the app or by email first.
+  </p>
+</TextPage>

@@ -555,7 +555,14 @@ const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-tex
 
         <div class="border-t border-gray-800 pt-8">
           <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p class="text-gray-500 text-sm">&copy; {year} Dusty. All rights reserved.</p>
+            <div class="flex flex-col sm:flex-row items-center gap-x-6 gap-y-2">
+              <p class="text-gray-500 text-sm">&copy; {year} Dusty. All rights reserved.</p>
+              <nav aria-label="Legal" class="flex gap-5 text-sm">
+                <a href="/privacy" class="text-gray-400 hover:text-white transition-colors duration-200">Privacy</a>
+                <a href="/terms" class="text-gray-400 hover:text-white transition-colors duration-200">Terms</a>
+                <a href="/support" class="text-gray-400 hover:text-white transition-colors duration-200">Support</a>
+              </nav>
+            </div>
             <a
               href="#early-access"
               data-early-access

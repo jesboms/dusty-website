@@ -33,6 +33,18 @@ export const locations = [
   'Edinburgh', 'Cardiff', 'Belfast',
 ];
 
+// The company behind Dusty, for the privacy policy, terms and support pages.
+// Fill in the blanks before the App Store release: Companies House has the
+// number and registered office, and the ICO gives the registration number
+// once the data protection fee is paid (ico.org.uk/fee).
+export const company = {
+  legalName: 'Wiseman Central Limited',
+  tradingName: 'Dusty',
+  number: '[FILL IN: company number]',
+  registeredOffice: '[FILL IN: registered office address]',
+  icoNumber: '[FILL IN: ICO registration number]',
+};
+
 export const contact = {
   email: 'info@getdusty.co.uk',
   phoneDisplay: '+44 7598 833724',
