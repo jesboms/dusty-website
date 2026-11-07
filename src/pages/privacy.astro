@@ -21,7 +21,7 @@ const ico = filled(company.icoNumber);
 <TextPage
   title="Privacy policy"
   description="How Dusty collects, uses and protects your personal data."
-  updated="3 November 2026"
+  updated="7 November 2026"
 >
   <p class="mt-8">
     This policy explains what personal data Dusty collects when you use our app and website, why we collect it, who
@@ -45,8 +45,8 @@ const ico = filled(company.icoNumber);
   <h3>Everyone with an account</h3>
   <ul>
     <li><strong>Account details:</strong> your name, email address, password (stored encrypted by our authentication provider; we can't see it) and whether you're a customer or a cleaner.</li>
-    <li><strong>Mobile number:</strong> verified by text message. It's used for calls about a booking through Dusty's own number, so the other person never sees your number.</li>
-    <li><strong>Profile photo</strong>, if you add one.</li>
+    <li><strong>Mobile number:</strong> verified by text message. It's used for calls about a booking through Dusty's own number, so the other person never sees your number. We also compare numbers to stop people using a referral code on their own second account.</li>
+    <li><strong>Profile photo</strong>, if you add one. Cleaners must add one, and our team compares it with their photo ID during verification.</li>
     <li><strong>Messages</strong> you send to other users in the app, and enquiries before a booking.</li>
     <li><strong>Reports and blocks</strong> you make, or that are made about you.</li>
     <li><strong>Device information:</strong> a push notification token so we can send you notifications, and crash reports (the type of phone, app version and what went wrong, not who you are).</li>
@@ -60,7 +60,7 @@ const ico = filled(company.icoNumber);
     <li><strong>Payment:</strong> your card is entered into Stripe's secure payment form. Stripe stores it; we only see the card type, last four digits and expiry date.</li>
     <li><strong>What you type to Ask Dusty</strong>, our AI booking assistant (see <a href="#ai">section 5</a>).</li>
     <li><strong>Reviews</strong> you write, and <strong>ratings</strong> cleaners give you after a clean (four yes/no questions, such as whether the home was ready on time).</li>
-    <li><strong>Points and referrals:</strong> your points balance and history, and your referral code.</li>
+    <li><strong>Points and referrals:</strong> your points balance and history, your referral code, and who invited you. If you join with a friend's code, they see your first name and whether you've had your first clean.</li>
   </ul>
 
   <h3>Cleaners</h3>
@@ -121,12 +121,18 @@ const ico = filled(company.icoNumber);
     opens a conversation for a reason: a report, a safety concern, a payment dispute or a legal request. Every time
     they do, it's logged.
   </p>
+  <p>
+    <strong>Blocked messages.</strong> If a message is stopped because it contains contact details or offensive words,
+    it isn't delivered, but we keep a copy with the conversation. Our team may see it when looking into a report or a
+    safety concern, in the same way as other messages.
+  </p>
 
   <h2 id="sharing">4. Who we share it with</h2>
   <p>
     <strong>The other person on a booking.</strong> A cleaner you book sees your name, the home's address and
     access instructions, your notes and photos, and your rating as a customer. A customer sees a cleaner's name,
-    photo, bio, rate, reviews and approximate distance. Neither sees the other's phone number or email address.
+    photo, bio, rate, reviews and approximate distance, and whether they're insured (once we've
+    checked their certificate). Reviews show the first name of the customer who wrote them. Neither sees the other's phone number or email address.
   </p>
   <p><strong>Companies that run parts of Dusty for us.</strong> They may only use your data to provide their service to us:</p>
   <table>
