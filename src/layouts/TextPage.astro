@@ -2,6 +2,7 @@
 // Plain reading layout for the privacy policy, terms and support pages:
 // the logo back to the home page, a title, and the page's text.
 import Layout from './Layout.astro';
+import Logo from '../components/Logo.astro';
 import { contact } from '../data/site';
 
 interface Props {
@@ -13,16 +14,14 @@ interface Props {
 
 const { title, description, updated } = Astro.props;
 const year = new Date().getFullYear();
-const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-text text-transparent';
 ---
 
 <Layout title={`${title} | Dusty`} description={description}>
   <div class="min-h-screen bg-white text-gray-900 flex flex-col">
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
       <nav class="max-w-3xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2.5">
-          <img src="/logo.png" alt="" width="40" height="40" class="h-10 w-10 rounded-lg" />
-          <span class={`text-2xl font-extrabold tracking-tight ${gradientText}`}>Dusty</span>
+        <a href="/" class="flex items-center">
+          <Logo class="h-8" />
         </a>
         <a href="/support" class="text-sm font-medium text-gray-600 hover:text-violet-700">Help</a>
       </nav>

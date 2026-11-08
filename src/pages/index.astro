@@ -2,6 +2,7 @@
 // A port of the original site (adeolade1st/getDusty-Live-Final, src/App.tsx):
 // same layout, classes and copy, with the app's logo and our own links/data.
 import Layout from '../layouts/Layout.astro';
+import Logo from '../components/Logo.astro';
 import { links, contact, stats, testimonials, heroImages, waitlistForm, locations } from '../data/site';
 import {
   Menu, X, Sparkles, CircleCheck, Users, Calendar, House,
@@ -68,9 +69,8 @@ const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-tex
     <!-- Header -->
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <a href="#hero" data-scroll class="flex items-center gap-2.5 group">
-          <img src="/logo.png" alt="" width="40" height="40" class="h-10 w-10 rounded-lg" />
-          <span class={`text-2xl font-extrabold tracking-tight ${gradientText}`}>Dusty</span>
+        <a href="#hero" data-scroll class="flex items-center group">
+          <Logo class="h-8" />
         </a>
 
         <div class="hidden md:flex items-center gap-1">
@@ -502,9 +502,8 @@ const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-tex
       <div class="max-w-6xl mx-auto">
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <div>
-            <div class="flex items-center gap-2.5 mb-4">
-              <img src="/logo.png" alt="" width="40" height="40" class="h-10 w-10 rounded-lg" />
-              <span class="text-2xl font-extrabold tracking-tight text-white">Dusty</span>
+            <div class="flex items-center mb-4">
+              <Logo class="h-8" mark="text-white" word="text-white" />
             </div>
             <p class="text-gray-400 leading-relaxed">Trusted home cleaning, matched to you.</p>
           </div>

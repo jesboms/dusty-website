@@ -1,0 +1,20 @@
+---
+// The Dusty lockup: the broom mark and the "Dusty" wordmark, as one inline
+// SVG so it takes its colours from Tailwind text classes. The source of
+// truth is brand/svg/dusty-lockup.svg in the app repo (jesboms/dusty); the
+// wordmark is Inter Display SemiBold outlined, so no font needs loading.
+interface Props {
+  /** Tailwind text colour for the mark, e.g. "text-violet-600". */
+  mark?: string;
+  /** Tailwind text colour for the wordmark, e.g. "text-gray-900". */
+  word?: string;
+  /** Height classes for the whole lockup. */
+  class?: string;
+}
+const { mark = 'text-violet-600', word = 'text-gray-900', class: className = 'h-8' } = Astro.props;
+---
+
+<svg viewBox="0 0 3629.88 1022.54" class={`w-auto ${className}`} role="img" aria-label="Dusty">
+  <g transform="translate(0 0) scale(10.04) translate(-6 -1.39)"><path class={mark} fill="currentColor" d="M30.34 48.31A5 5 0 0 1 37.03 47.3L53.26 58.24A5 5 0 0 1 55.27 61.03L62.57 86.92A4 4 0 0 1 58.72 92L11.25 92A4 4 0 0 1 7.39 86.94L9.41 79.59A40 40 0 0 1 16.83 65.09ZM53.01 52.05L79.3 13.08A7.5 7.5 0 0 0 66.86 4.7L40.58 43.66A7.5 7.5 0 0 0 53.01 52.05ZM75.5 85a6.5 6.5 0 1 0 13 0a6.5 6.5 0 1 0 -13 0Z" /></g>
+  <path class={word} fill="currentColor" transform="translate(1058.48 818.44)" d="M306.2 0C528.8 0 662.1 -139.6 662.1 -364.7C662.1 -588.4 527.8 -727.5 311.5 -727.5H60.5V0ZM189.5 -110.4V-617.2H303.2C456.5 -617.2 531.7 -524.9 531.7 -364.7C531.7 -203.1 457.5 -110.4 299.3 -110.4Z M905.5 10.3C976.8 10.3 1029.1 -21 1064.2 -79.1V0H1185.3V-515.6H1061.8V-224.1C1061.8 -136.2 1013.9 -97.7 949 -97.7C883.1 -97.7 845 -137.2 845 -212.9V-515.6H722V-193.4C722 -61 797.6 10.3 905.5 10.3Z M1466.9 12.2C1594.3 12.2 1685.6 -51.3 1685.6 -151.9C1685.6 -227.5 1638.2 -272.5 1536.2 -293.9L1443.4 -313C1400.4 -322.3 1375.1 -341.3 1375.1 -372.1C1375.1 -407.2 1408.3 -434.6 1462.5 -434.6C1518.6 -434.6 1556.2 -400.9 1557.2 -355H1672.9C1670 -460.9 1584.5 -526.9 1459.5 -526.9C1333.6 -526.9 1252 -462.9 1252 -368.2C1252 -290 1303.8 -239.7 1402.4 -219.2L1490.3 -201.2C1533.8 -191.9 1560.6 -173.8 1560.6 -142.6C1560.6 -106 1524.5 -80.1 1464.9 -80.1C1403.4 -80.1 1367.2 -108.9 1361.9 -159.2H1240.3C1248.1 -48.3 1341.4 12.2 1466.9 12.2Z M2021.3 -515.6H1916.3V-656.2H1792.8V-515.6H1703V-416.5H1792.8V-129.9C1792.8 -41.5 1842.1 0 1947.1 0H2021.3V-99.1H1968.6C1928.6 -99.1 1916.3 -111.3 1916.3 -147.9V-416.5H2021.3Z M2104.1 204.1H2184.7C2259.4 204.1 2310.2 165.5 2340.9 85L2571.4 -515.6H2442.5L2348.3 -247.1C2335.1 -209 2322.9 -170.9 2311.2 -132.8C2299.4 -170.9 2286.7 -209 2274 -247.1L2179.3 -515.6H2048.9L2247.7 -2.9L2228.6 46.9C2214 87.4 2198.4 104 2165.2 104H2104.1Z" />
+</svg>
