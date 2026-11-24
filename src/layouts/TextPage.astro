@@ -1,5 +1,5 @@
 ---
-// Plain reading layout for the privacy policy, terms and support pages:
+// Plain reading layout for the FAQ, privacy policy, terms and support pages:
 // the logo back to the home page, a title, and the page's text.
 import Layout from './Layout.astro';
 import { contact } from '../data/site';
@@ -9,14 +9,16 @@ interface Props {
   description: string;
   /** "Last updated" date shown under the title, e.g. "3 November 2026". */
   updated?: string;
+  /** Extra structured data for this page (see Layout). */
+  jsonLd?: Record<string, unknown>[];
 }
 
-const { title, description, updated } = Astro.props;
+const { title, description, updated, jsonLd } = Astro.props;
 const year = new Date().getFullYear();
 const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-text text-transparent';
 ---
 
-<Layout title={`${title} | Dusty`} description={description}>
+<Layout title={`${title} | Dusty`} description={description} jsonLd={jsonLd}>
   <div class="min-h-screen bg-white text-gray-900 flex flex-col">
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
       <nav class="max-w-3xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
@@ -24,7 +26,10 @@ const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-tex
           <img src="/logo.png" alt="" width="40" height="40" class="h-10 w-10 rounded-lg" />
           <span class={`text-2xl font-extrabold tracking-tight ${gradientText}`}>Dusty</span>
         </a>
-        <a href="/support" class="text-sm font-medium text-gray-600 hover:text-violet-700">Help</a>
+        <div class="flex items-center gap-5">
+          <a href="/faq" class="text-sm font-medium text-gray-600 hover:text-violet-700">FAQ</a>
+          <a href="/support" class="text-sm font-medium text-gray-600 hover:text-violet-700">Help</a>
+        </div>
       </nav>
     </header>
 
@@ -40,6 +45,7 @@ const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-tex
       <div class="max-w-3xl mx-auto flex flex-col sm:flex-row gap-4 justify-between text-sm text-gray-500">
         <p>&copy; {year} Dusty</p>
         <nav aria-label="Legal" class="flex flex-wrap gap-5">
+          <a href="/faq" class="hover:text-violet-700">FAQ</a>
           <a href="/privacy" class="hover:text-violet-700">Privacy</a>
           <a href="/terms" class="hover:text-violet-700">Terms</a>
           <a href="/support" class="hover:text-violet-700">Support</a>

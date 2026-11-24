@@ -1,0 +1,39 @@
+---
+// Public FAQ for people deciding whether to use Dusty (customers, short-let
+// hosts and cleaners). The questions and answers live in src/data/faq.ts,
+// which also feeds this page's FAQPage structured data.
+import TextPage from '../layouts/TextPage.astro';
+import { faqGroups } from '../data/faq';
+import { faqPageJsonLd } from '../data/structuredData';
+---
+
+<TextPage
+  title="Frequently asked questions"
+  description="How Dusty works: what a cleaner costs, how cleaners are vetted and insured, cancellations, where Dusty is available, and how cleaners find work."
+  jsonLd={[faqPageJsonLd(faqGroups)]}
+>
+  <p class="mt-6">
+    Dusty is a UK app for booking vetted, self-employed home cleaners. Here are the questions people ask most before
+    they book, or before they join as a cleaner. Already using Dusty? See <a href="/support">help and support</a>.
+  </p>
+
+  <nav aria-label="On this page" class="mt-6 flex flex-wrap gap-2 not-prose">
+    {faqGroups.map((g) => (
+      <a href={`#${g.id}`} class="rounded-full bg-violet-50 border border-violet-100 px-3 py-1 text-sm font-medium text-violet-700 no-underline hover:bg-violet-100">
+        {g.title}
+      </a>
+    ))}
+  </nav>
+
+  {faqGroups.map((g) => (
+    <section>
+      <h2 id={g.id}>{g.title}</h2>
+      {g.faqs.map((f) => (
+        <>
+          <h3>{f.q}</h3>
+          <p set:html={f.a} />
+        </>
+      ))}
+    </section>
+  ))}
+</TextPage>

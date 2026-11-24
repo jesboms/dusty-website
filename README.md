@@ -16,6 +16,9 @@ Every push to `main` deploys automatically (`.github/workflows/deploy.yml`).
 |---|---|
 | Links (waitlist forms, WhatsApp, store links), contact details, stats, hero photos, reviews | `src/data/site.ts` |
 | The page | `src/pages/index.astro` |
+| FAQ questions and answers (the `/faq` page and its FAQPage structured data) | `src/data/faq.ts` |
+| Structured data about Dusty for Google and AI assistants (company, website, app) | `src/data/structuredData.ts` |
+| Which crawlers may read the site, including AI ones | `public/robots.txt` |
 | Colours (Tailwind 3 palette, pinned so the port of the original design matches) | `src/styles/global.css` |
 | Logo, favicons, hero photos, app mockup, social preview image, `CNAME` | `public/` |
 

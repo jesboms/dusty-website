@@ -2,6 +2,7 @@
 // A port of the original site (adeolade1st/getDusty-Live-Final, src/App.tsx):
 // same layout, classes and copy, with the app's logo and our own links/data.
 import Layout from '../layouts/Layout.astro';
+import { websiteJsonLd, appJsonLd } from '../data/structuredData';
 import { links, contact, stats, testimonials, heroImages, waitlistForm, locations } from '../data/site';
 import {
   Menu, X, Sparkles, CircleCheck, Users, Calendar, House,
@@ -10,9 +11,10 @@ import {
 } from '@lucide/astro';
 
 const nav = [
-  { label: 'About', id: 'about' },
-  { label: 'App', id: 'app' },
-  { label: 'Contact', id: 'contact' },
+  { label: 'About', href: '#about' },
+  { label: 'App', href: '#app' },
+  { label: 'FAQ', href: '/faq' },
+  { label: 'Contact', href: '#contact' },
 ];
 
 const about = [
@@ -63,7 +65,7 @@ const gradientBtn = 'bg-gradient-to-r from-violet-600 to-purple-700 hover:from-v
 const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-text text-transparent';
 ---
 
-<Layout>
+<Layout jsonLd={appJsonLd ? [websiteJsonLd, appJsonLd] : [websiteJsonLd]}>
   <div class="min-h-screen bg-white text-gray-900">
     <!-- Header -->
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
@@ -76,7 +78,7 @@ const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-tex
         <div class="hidden md:flex items-center gap-1">
           {nav.map((item) => (
             <a
-              href={`#${item.id}`}
+              href={item.href}
               data-scroll
               class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-violet-700 rounded-lg hover:bg-violet-50 transition-all duration-200"
             >
@@ -110,7 +112,7 @@ const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-tex
         <div class="px-4 py-3 space-y-1">
           {nav.map((item) => (
             <a
-              href={`#${item.id}`}
+              href={item.href}
               data-scroll
               class="block w-full text-left px-4 py-3 text-gray-700 hover:text-violet-700 hover:bg-violet-50 rounded-lg font-medium transition"
             >
@@ -513,7 +515,7 @@ const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-tex
             <h3 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-5">Quick Links</h3>
             <div class="space-y-3">
               {nav.map((item) => (
-                <a href={`#${item.id}`} data-scroll class="block text-gray-400 hover:text-white transition-colors duration-200">
+                <a href={item.href} data-scroll class="block text-gray-400 hover:text-white transition-colors duration-200">
                   {item.label}
                 </a>
               ))}
@@ -558,6 +560,7 @@ const gradientText = 'bg-gradient-to-r from-violet-600 to-purple-700 bg-clip-tex
             <div class="flex flex-col sm:flex-row items-center gap-x-6 gap-y-2">
               <p class="text-gray-500 text-sm">&copy; {year} Dusty. All rights reserved.</p>
               <nav aria-label="Legal" class="flex gap-5 text-sm">
+                <a href="/faq" class="text-gray-400 hover:text-white transition-colors duration-200">FAQ</a>
                 <a href="/privacy" class="text-gray-400 hover:text-white transition-colors duration-200">Privacy</a>
                 <a href="/terms" class="text-gray-400 hover:text-white transition-colors duration-200">Terms</a>
                 <a href="/support" class="text-gray-400 hover:text-white transition-colors duration-200">Support</a>

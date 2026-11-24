@@ -1,15 +1,22 @@
 ---
 import '../styles/global.css';
+import { organizationJsonLd } from '../data/structuredData';
 
 interface Props {
   title?: string;
   description?: string;
+  /** Structured data (schema.org objects) for this page, on top of the Organization block every page gets. */
+  jsonLd?: Record<string, unknown>[];
 }
 
 const {
   title = 'Dusty — trusted home cleaning, matched to you',
   description = 'Dusty connects busy UK households with vetted, local cleaners. Tell us what you need and our AI finds the right cleaner for you.',
+  jsonLd = [],
 } = Astro.props;
+
+// `</` can't appear inside a <script> block, so escape it in the JSON.
+const structuredData = [organizationJsonLd, ...jsonLd].map((d) => JSON.stringify(d).replace(/<\//g, '<\\/'));
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/og.jpg', Astro.site);
@@ -35,6 +42,9 @@ const ogImage = new URL('/og.jpg', Astro.site);
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {structuredData.map((json) => <script type="application/ld+json" is:inline set:html={json} />)}
   </head>
   <body>
     <slot />
