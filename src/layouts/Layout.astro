@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { links } from '../data/site';
 
 interface Props {
   title?: string;
@@ -38,5 +39,41 @@ const ogImage = new URL('/og.jpg', Astro.site);
   </head>
   <body>
     <slot />
+    <!--
+      Visit counting, shown on Dusty's own dashboard. No cookies and nothing
+      saved on the visitor's device; Dusty's server doesn't keep IP addresses
+      (see the privacy policy). Respects "Do Not Track".
+    -->
+    <script is:inline define:vars={{ customer: links.customerWaitlist, cleaner: links.cleanerSignup }}>
+      (function () {
+        var API = 'https://dusty-api.fly.dev/w';
+        if (navigator.doNotTrack === '1' || /^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return;
+        function send(k) {
+          try {
+            var utm = new URLSearchParams(location.search).get('utm_source');
+            var body = JSON.stringify({ k: k, p: location.pathname, r: document.referrer || undefined, u: utm || undefined });
+            if (navigator.sendBeacon) navigator.sendBeacon(API, body);
+            else fetch(API, { method: 'POST', body: body, keepalive: true, mode: 'no-cors' });
+          } catch (e) {}
+        }
+        send('view');
+        document.addEventListener('click', function (e) {
+          var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+          if (!a) return;
+          var h = a.href;
+          var k = /apps\.apple\.com/.test(h) ? 'app_store'
+            : /play\.google\.com/.test(h) ? 'google_play'
+            : /wa\.me|whatsapp\.com/.test(h) ? 'whatsapp'
+            : /instagram\.com/.test(h) ? 'instagram'
+            : h === customer ? 'waitlist_link'
+            : h === cleaner ? 'cleaner_signup'
+            : null;
+          if (k) send(k);
+        });
+        document.addEventListener('submit', function (e) {
+          if (e.target && e.target.id === 'early-access-form') send('waitlist_form');
+        });
+      })();
+    </script>
   </body>
 </html>

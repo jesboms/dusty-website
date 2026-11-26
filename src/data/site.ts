@@ -11,7 +11,7 @@ export const links = {
   instagram: 'https://instagram.com/getdustyapp',
   // Fill these in when the app is live in the stores; the badges switch from
   // "coming soon" to real download links automatically.
-  appStore: '',
+  appStore: 'https://apps.apple.com/gb/app/id6799764303',
   googlePlay: '',
 };
 
